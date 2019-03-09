@@ -9,6 +9,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base_common" />
+            <option value="$PROJECT_DIR$/base_libs" />
+            <option value="$PROJECT_DIR$/module_article" />
+            <option value="$PROJECT_DIR$/module_explore" />
+            <option value="$PROJECT_DIR$/module_mine" />
+            <option value="$PROJECT_DIR$/module_todo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

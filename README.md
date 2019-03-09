@@ -42,15 +42,17 @@ WAN ANDROID 站点汇总了 Android 相关的项目、知识体系、公众号�
 
 ## 第三方依赖
 
-* [rxjava](https://github.com/ReactiveX/RxJava)
-* [rxandroid](https://github.com/ReactiveX/RxAndroid)
-* [rxlifecycle](https://github.com/trello/RxLifecycle)
-* [rxpermission](https://github.com/tbruyelle/RxPermissions)
-* [glide](https://github.com/bumptech/glide)
-* [stetho](https://github.com/facebook/stetho)
-* [okhttp3](https://github.com/square/okhttp)
-* [retrofit](https://github.com/square/retrofit)
-* [eventbus](https://github.com/greenrobot/EventBus)
+* [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava)
+* [ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid)
+* [trello/RxLifecycle](https://github.com/trello/RxLifecycle)
+* [tbruyelle/RxPermissions](https://github.com/tbruyelle/RxPermissions)
+* [JakeWharton/RxBinding](https://github.com/JakeWharton/RxBinding)
+* [bumptech/glide](https://github.com/bumptech/glide)
+* [facebook/stetho](https://github.com/facebook/stetho)
+* [square/okhttp](https://github.com/square/okhttp)
+* [square/retrofit](https://github.com/square/retrofit)
+* [greenrobot/EventBus](https://github.com/greenrobot/EventBus)
+* [alibaba/ARouter](https://github.com/alibaba/ARouter)
 
 
 ## License
