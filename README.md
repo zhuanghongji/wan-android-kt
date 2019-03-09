@@ -53,6 +53,7 @@ WAN ANDROID 站点汇总了 Android 相关的项目、知识体系、公众号�
 * [square/retrofit](https://github.com/square/retrofit)
 * [greenrobot/EventBus](https://github.com/greenrobot/EventBus)
 * [alibaba/ARouter](https://github.com/alibaba/ARouter)
+* [square/moshi](https://github.com/square/moshi)
 
 
 ## License

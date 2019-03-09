@@ -27,10 +27,10 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility rootProject.ext.java['sourceCompatibilityVersion']
-        targetCompatibility rootProject.ext.java['targetCompatibilityVersion']
-    }
+//    compileOptions {
+//        sourceCompatibility rootProject.ext.java['sourceCompatibilityVersion']
+//        targetCompatibility rootProject.ext.java['targetCompatibilityVersion']
+//    }
 
 }
 
@@ -68,6 +68,8 @@ dependencies {
     api rootProject.ext.libs['rxbinding-appcompat-v7']
     api rootProject.ext.libs['rxbinding-recyclerview-v7']
 
+    api rootProject.ext.libs['moshi']
+
     api rootProject.ext.libs['okhttp3']
     api rootProject.ext.libs['okhttp3-mockwebserver']
     api rootProject.ext.libs['okhttp3-logging-interceptor']
@@ -75,7 +77,7 @@ dependencies {
     api rootProject.ext.libs['retrofit']
     api rootProject.ext.libs['retrofit-adapter-rxjava']
     api rootProject.ext.libs['retrofit-converter']
-    api rootProject.ext.libs['retrofit-converter-gson']
+    api rootProject.ext.libs['retrofit-converter-moshi']
 
     api rootProject.ext.libs['arouter-api']
     api rootProject.ext.libs['arouter-compiler']

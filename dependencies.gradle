@@ -10,6 +10,8 @@ def rxPermissions = '0.10.2'
 def rxBindingVersion = '3.0.0-alpha2'
 def rxLifecycleVersion = '3.0.0'
 
+def moshiVersion = "1.8.0"
+
 def stethoVersion = '1.5.0'
 def okHttpVersion = '3.13.1'
 def retrofitVersion = '2.5.0'
@@ -59,7 +61,7 @@ project.ext {
             "rxlifecycle"                           : "com.trello.rxlifecycle3:rxlifecycle:${rxLifecycleVersion}",
             "rxlifecycle-android"                   : "com.trello.rxlifecycle3:rxlifecycle-android:${rxLifecycleVersion}",
             "rxlifecycle-components"                : "com.trello.rxlifecycle3:rxlifecycle-components:${rxLifecycleVersion}",
-            "rxlifecycle-components-preference"                : "com.trello.rxlifecycle3:rxlifecycle-components-preference:${rxLifecycleVersion}",
+            "rxlifecycle-components-preference"     : "com.trello.rxlifecycle3:rxlifecycle-components-preference:${rxLifecycleVersion}",
             "rxlifecycle-android-lifecycle"         : "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:${rxLifecycleVersion}",
             "rxlifecycle-kotlin"                    : "com.trello.rxlifecycle3:rxlifecycle-kotlin:${rxLifecycleVersion}",
             "rxlifecycle-android-lifecycle-kotlin"  : "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle-kotlin:${rxLifecycleVersion}",
@@ -74,9 +76,9 @@ project.ext {
             "okhttp3-logging-interceptor"   : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
 
             "retrofit"                    : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            "retrofit-adapter-rxjava"              : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            "retrofit-adapter-rxjava"     : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             "retrofit-converter"          : "com.squareup.retrofit2:converter-scalars:${retrofitVersion}",
-            "retrofit-converter-gson"     : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            "retrofit-converter-moshi"    : "com.squareup.retrofit2:converter-moshi:${retrofitVersion}",
 
             "arouter-api"                 : "com.alibaba:arouter-api:${aRouterApiVersion}",
             "arouter-compiler"            : "com.alibaba:arouter-compiler:${aRouterCompilerVersion}",
@@ -90,5 +92,6 @@ project.ext {
 
             "eventbus"                    : "org.greenrobot:eventbus:${eventBusVersion}",
             "junit"                       : "junit:junit:${junitVersion}",
+            "moshi"                       : "com.squareup.moshi:moshi:${moshiVersion}"
     ]
 }

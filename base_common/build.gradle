@@ -26,10 +26,10 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility rootProject.ext.java['sourceCompatibilityVersion']
-        targetCompatibility rootProject.ext.java['targetCompatibilityVersion']
-    }
+//    compileOptions {
+//        sourceCompatibility rootProject.ext.java['sourceCompatibilityVersion']
+//        targetCompatibility rootProject.ext.java['targetCompatibilityVersion']
+//    }
 
 }
 
