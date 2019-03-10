@@ -1,5 +1,6 @@
 package com.zhuanghongji.wan.base_common.http
 
+import com.zhuanghongji.wan.base_common.BuildConfig
 import com.zhuanghongji.wan.base_common.api.ApiConstant
 import com.zhuanghongji.wan.base_common.api.ApiService
 import com.zhuanghongji.wan.base_common.http.intercepter.CacheIntercepter
@@ -8,6 +9,7 @@ import com.zhuanghongji.wan.base_common.http.intercepter.HeaderIntercepter
 import com.zhuanghongji.wan.base_common.impl.App
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -48,19 +50,19 @@ object HttpManager {
 
     private fun getOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient().newBuilder()
-//        val httpLoginInterceptor = HttpLoggingInterceptor()
-//        if (BuildConfig.DEBUG) {
-//            httpLoginInterceptor.level = HttpLoggingInterceptor.Level.BODY
-//        } else {
-//            httpLoginInterceptor.level = HttpLoggingInterceptor.Level.NONE
-//        }
+        val httpLoginInterceptor = HttpLoggingInterceptor()
+        if (BuildConfig.DEBUG) {
+            httpLoginInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            httpLoginInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
 
         // 设置请求的缓大小和位置
         val cacheFile = File(App.context.cacheDir, "cache")
         val cache = Cache(cacheFile, MAX_CACHE_SIZE)
 
         builder.run {
-//            addInterceptor(httpLoginInterceptor)
+            addInterceptor(httpLoginInterceptor)
             addInterceptor(HeaderIntercepter())
             addInterceptor(CookieInterceptor())
             addInterceptor(CacheIntercepter())

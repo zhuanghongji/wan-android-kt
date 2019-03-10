@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
 
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android['compileSdkVersion']
 
     defaultConfig {
         minSdkVersion rootProject.ext.android['minSdkVersion']
@@ -37,50 +37,38 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // testImplementation rootProject.ext.libs['junit']
+    testImplementation rootProject.ext.libs['junit']
 
-    //    annotationProcessor rootProject.ext.libs['glide-compiler']
+    annotationProcessor rootProject.ext.libs['glide-compiler']
+    annotationProcessor rootProject.ext.libs['arouter-compiler']
 
-    //    annotationProcessor rootProject.ext.libs['arouter-compiler']
-
-    //    api rootProject.ext.supports['support-v4']
+    api rootProject.ext.supports['support-v4']
     api rootProject.ext.supports['appcompat-v7']
-
-    //    api rootProject.ext.supports['recyclerview-v7']
-
-    //    api rootProject.ext.supports['cardview-v7']
-
-    //    api rootProject.ext.supports['design']
+    api rootProject.ext.supports['recyclerview-v7']
+    api rootProject.ext.supports['cardview-v7']
+    api rootProject.ext.supports['design']
     api rootProject.ext.supports['constraint-layout']
 
-    // api rootProject.ext.supports['runner']
+    api rootProject.ext.supports['runner']
+    api rootProject.ext.supports['espresso-core']
 
-    // api rootProject.ext.supports['espresso-core']
     api rootProject.ext.libs['rxjava']
     api rootProject.ext.libs['rxandroid']
     api rootProject.ext.libs['rxpermissions']
 
     //    api rootProject.ext.libs['rxlifecycle']
-
     //    api rootProject.ext.libs['rxlifecycle-android']
-
     //    api rootProject.ext.libs['rxlifecycle-components']
-
     //    api rootProject.ext.libs['rxlifecycle-components-preference']
-
     //    api rootProject.ext.libs['rxlifecycle-android-lifecycle']
-
     //    api rootProject.ext.libs['rxlifecycle-kotlin']
-
     //    api rootProject.ext.libs['rxlifecycle-android-lifecycle-kotlin']
-
     //    api rootProject.ext.libs['rxlifecycle-navi']
 
     //    api rootProject.ext.libs['rxbinding']
-
     //    api rootProject.ext.libs['rxbinding-appcompat-v7']
-
     //    api rootProject.ext.libs['rxbinding-recyclerview-v7']
+
     api rootProject.ext.libs['moshi']
     api rootProject.ext.libs['okhttp3']
     api rootProject.ext.libs['okhttp3-mockwebserver']
@@ -90,19 +78,16 @@ dependencies {
     api rootProject.ext.libs['retrofit-converter']
     api rootProject.ext.libs['retrofit-converter-moshi']
 
-    //    api rootProject.ext.libs['arouter-api']
+    api rootProject.ext.libs['arouter-api']
+    api rootProject.ext.libs['arouter-compiler']
+    api rootProject.ext.libs['arouter-register']
 
-    //    api rootProject.ext.libs['arouter-compiler']
+    api rootProject.ext.libs['stetho']
+    api rootProject.ext.libs['stetho-okhttp3']
 
-    //    api rootProject.ext.libs['arouter-register']
+    api rootProject.ext.libs['glide']
+    api rootProject.ext.libs['glide-compiler']
 
-    //    api rootProject.ext.libs['stetho']
-
-    //    api rootProject.ext.libs['stetho-okhttp3']
-
-    //    api rootProject.ext.libs['glide']
-
-    //    api rootProject.ext.libs['glide-compiler']
     api rootProject.ext.libs['eventbus']
     api rootProject.ext.libs['junit']
 }
