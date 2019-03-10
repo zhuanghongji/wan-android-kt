@@ -1,5 +1,6 @@
 package com.zhuanghongji.wan
 
+import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import com.zhuanghongji.wan.base_common.base.BaseActivity
@@ -12,6 +13,15 @@ class MainActivity : BaseActivity() {
     private val TAG = "MainActivity"
 
     private lateinit var btnPerform: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    override fun useEventBus(): Boolean {
+        return false
+    }
 
     override fun getLayoutResID(): Int {
         return R.layout.activity_main

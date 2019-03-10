@@ -1,7 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion rootProject.ext.android['compileSdkVersion']
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion rootProject.ext.android['minSdkVersion']
@@ -26,23 +28,24 @@ android {
         }
     }
 
-//    compileOptions {
-//        sourceCompatibility rootProject.ext.java['sourceCompatibilityVersion']
-//        targetCompatibility rootProject.ext.java['targetCompatibilityVersion']
-//    }
+    compileOptions {
+        sourceCompatibility rootProject.ext.java['sourceCompatibilityVersion']
+        targetCompatibility rootProject.ext.java['targetCompatibilityVersion']
+    }
 
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation rootProject.ext.supports['appcompat-v7']
-    testImplementation rootProject.ext.libs['junit']
-    androidTestImplementation rootProject.ext.supports['runner']
-    androidTestImplementation rootProject.ext.supports['espresso-core']
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // implementation rootProject.ext.supports['appcompat-v7']
+    //    testImplementation rootProject.ext.libs['junit']
+    //    androidTestImplementation rootProject.ext.supports['runner']
+    //    androidTestImplementation rootProject.ext.supports['espresso-core']
     api project(':base_libs')
-
-    annotationProcessor rootProject.ext.libs['glide-compiler']
-    annotationProcessor rootProject.ext.libs['arouter-compiler']
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //    annotationProcessor rootProject.ext.libs['glide-compiler']
+    //    annotationProcessor rootProject.ext.libs['arouter-compiler']
+}
+repositories {
+    mavenCentral()
 }

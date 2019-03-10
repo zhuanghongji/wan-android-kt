@@ -1,7 +1,6 @@
 package com.zhuanghongji.wan.base_common.manager
 
 import com.zhuanghongji.wan.base_common.delegate.Preference
-import org.apache.commons.lang3.text.StrBuilder
 
 /**
  * Cookie 管理类
@@ -13,7 +12,7 @@ object CookieManager {
     const val COOKIE_NAME = "Cookie"
 
     fun encodeCookie(cookies: List<String>): String {
-        val sb = StrBuilder()
+        val sb = StringBuilder()
         val set = HashSet<String>()
         cookies.map {
             cookie -> cookie.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
