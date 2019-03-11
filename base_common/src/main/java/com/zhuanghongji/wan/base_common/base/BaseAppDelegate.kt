@@ -1,45 +1,20 @@
-package com.zhuanghongji.wan.base_common.impl
+package com.zhuanghongji.wan.base_common.base
 
-import android.content.Context
-import com.alibaba.android.arouter.launcher.ARouter
+import android.app.Application
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.zhuanghongji.wan.base_common.BuildConfig
 import com.zhuanghongji.wan.base_common.Wan
-import com.zhuanghongji.wan.base_common.base.BaseApplication
-import kotlin.properties.Delegates
+import com.zhuanghongji.wan.base_common.service.InitializeService
 
+class BaseAppDelegate(private val application: Application) {
 
-/**
- * App
- */
-class App: BaseApplication() {
-
-    companion object {
-        private val TAG = "BaseApplication"
-        var context: Context by Delegates.notNull()
-            private set
-
-        lateinit var instance: App
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-        context = applicationContext
+    fun onCreate() {
+        Wan.init(application)
 
         initLogger()
-        initARouter()
-    }
-
-    private fun initARouter() {
-        if (Wan.isAppDebug()) {
-            // 开启 InstantRun 之后，一定要在 ARouter.init 之前调用 openDebug
-            ARouter.openDebug()
-            ARouter.openLog()
-        }
-        ARouter.init(this)
+        InitializeService.start(application)
     }
 
     private fun initLogger() {

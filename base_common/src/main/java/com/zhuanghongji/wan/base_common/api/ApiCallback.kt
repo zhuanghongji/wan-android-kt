@@ -2,7 +2,7 @@ package com.zhuanghongji.wan.base_common.api
 
 import org.reactivestreams.Subscriber
 
-abstract class  ApiCallback<T>: Subscriber<Result<T>> {
+abstract class  ApiCallback<T>: Subscriber<ApiResult<T>> {
 
     abstract fun onSuccess(data: T)
 
@@ -12,7 +12,7 @@ abstract class  ApiCallback<T>: Subscriber<Result<T>> {
         // default do nothing
     }
 
-    override fun onNext(result: Result<T>) {
+    override fun onNext(result: ApiResult<T>) {
         if (result.errorCode == 0) {
             onSuccess(result.data)
         } else {

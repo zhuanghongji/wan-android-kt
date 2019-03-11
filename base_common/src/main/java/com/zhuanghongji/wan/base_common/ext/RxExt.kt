@@ -1,10 +1,13 @@
 package com.zhuanghongji.wan.base_common.ext
 
 import com.orhanobut.logger.Logger
+import com.zhuanghongji.wan.base_common.Wan
 import com.zhuanghongji.wan.base_common.api.BaseResult
 import com.zhuanghongji.wan.base_common.http.exception.ErrorStatus
+import com.zhuanghongji.wan.base_common.http.exception.ExceptionHandler
 import com.zhuanghongji.wan.base_common.http.function.RetryWithDelay
-import com.zhuanghongji.wan.base_common.impl.App
+import com.zhuanghongji.wan.base_common.mvp.IModel
+import com.zhuanghongji.wan.base_common.mvp.IView
 import com.zhuanghongji.wan.base_common.rx.SchedulerHelper
 import com.zhuanghongji.wan.base_common.utils.NetworkUtil
 import io.reactivex.Observable
@@ -20,43 +23,47 @@ const val TAG = "RxExt"
  * @param onSuccess 接口调用成功且结果为 "Success" 时回调
  */
 fun <T: BaseResult> Observable<T>.ss(
+    model: IModel?,
+    view: IView?,
     isShowLoading: Boolean = true,
     onSuccess: (T) -> Unit
 ) {
     this.compose(SchedulerHelper.ioToMain())
         .retryWhen(RetryWithDelay())
         .subscribe(object : Observer<T> {
+
+            override fun onComplete() {
+                Logger.t(TAG).i("onComplete")
+                view?.hideLoading()
+            }
+
             override fun onSubscribe(d: Disposable) {
-                Logger.i(TAG, "onSubscribe")
+                Logger.t(TAG).i("onSubscribe")
                 if (isShowLoading) {
-                    Logger.i(TAG, "showLoading")
+                    view?.showLoading()
+                }
+                model?.addDisposable(d)
+                if (!NetworkUtil.isNetworkConnected(Wan.getAppContext())) {
+                    view?.showDefaultMessage("网络未连接")
+                    onComplete()
                 }
             }
 
             override fun onNext(t: T) {
-                Logger.i(TAG, "onNext")
+                Logger.t(TAG).i("onNext, t = %s", t)
                 when(t.errorCode) {
                     ErrorStatus.SUCCESS -> onSuccess(t)
                     ErrorStatus.TOKEN_INVAILD -> {
                         Logger.w(TAG, "Token 过期，请重新登录")
                     }
-                    else -> Logger.w(TAG, "un handle error code")
+                    else -> view?.showDefaultMessage(t.errorMsg)
                 }
             }
 
             override fun onError(e: Throwable) {
-                Logger.i(TAG, "onError")
-                if (!NetworkUtil.isNetworkConnected(App.instance)) {
-                    Logger.w(TAG, "showDefaultMsg")
-                    onComplete()
-                }
-            }
-
-            override fun onComplete() {
-                Logger.i(TAG, "onComplete")
-                if (isShowLoading) {
-                    Logger.i(TAG, "hideLoading")
-                }
+                Logger.t(TAG).i("onError")
+                view?.hideLoading()
+                view?.showError(ExceptionHandler.handleException(e))
             }
         })
 }
@@ -68,12 +75,13 @@ fun <T: BaseResult> Observable<T>.ss(
  * @param onSuccess 接口调用成功且结果为 "Success" 时回调
  * @return Disposable
  */
-fun <T: BaseResult> Observable<T>.ssd (
+fun <T: BaseResult> Observable<T>.sss (
+    view: IView?,
     isShowLoading: Boolean = true,
     onSuccess: (T) -> Unit
 ): Disposable {
     if (isShowLoading) {
-        Logger.i(TAG, "showLoading")
+        view?.showLoading()
     }
     return this.compose(SchedulerHelper.ioToMain())
         .retryWhen(RetryWithDelay())
@@ -81,13 +89,13 @@ fun <T: BaseResult> Observable<T>.ssd (
             when(it.errorCode) {
                 ErrorStatus.SUCCESS -> onSuccess(it)
                 ErrorStatus.TOKEN_INVAILD -> {
-                    Logger.w(TAG, "Token 过期，请重新登录")
+                    Logger.t(TAG).i("Token 过期，请重新登录")
                 }
-                else -> Logger.w(TAG, "un handle error code")
+                else -> view?.showDefaultMessage(it.errorMsg)
             }
-            Logger.i(TAG, "hideLoading")
+            view?.hideLoading()
         }, {
-            Logger.i(TAG, "hideLoading")
-            Logger.i(TAG, "handle error")
+            view?.hideLoading()
+            view?.showError(ExceptionHandler.handleException(it))
         })
 }

@@ -3,7 +3,7 @@ package com.zhuanghongji.wan.base_common.http.cookies
 import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils
-import com.zhuanghongji.wan.base_common.impl.App
+import com.zhuanghongji.wan.base_common.Wan
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import java.io.*
@@ -20,7 +20,7 @@ class PersistentCookieStore {
     private val cookiesPrefs: SharedPreferences
 
     init {
-        cookiesPrefs = App.context.getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE)
+        cookiesPrefs = Wan.getAppContext().getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE)
         val prefsMap = cookiesPrefs.all
         for (entry in prefsMap) {
             val cookieNames = TextUtils.split(entry.value as String, ",")

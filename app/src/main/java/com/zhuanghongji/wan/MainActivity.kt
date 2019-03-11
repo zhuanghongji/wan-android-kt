@@ -2,12 +2,9 @@ package com.zhuanghongji.wan
 
 import android.util.Log
 import android.widget.TextView
-import com.orhanobut.logger.Logger
-import com.zhuanghongji.wan.base_common.base.BaseActivity
-import com.zhuanghongji.wan.base_common.ext.ss
-import com.zhuanghongji.wan.base_common.http.HttpManager
+import com.zhuanghongji.wan.base_common.base.BaseMvpActivity
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
     companion object {
         const val TAG = "MainActivity"
@@ -24,6 +21,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
+        super.initView()
         tvText = findViewById(R.id.tvText)
     }
 
@@ -45,9 +43,13 @@ class MainActivity : BaseActivity() {
         requestBanner()
     }
 
+    override fun createPresenter(): MainContract.Presenter = MainPresenter()
+
+    override fun setBanner(banners: String) {
+        tvText.text = banners
+    }
+
     private fun requestBanner() {
-        HttpManager.apiService.getBanner().ss {
-            Logger.t(TAG).d(it)
-        }
+        mPresenter?.requestBanner()
     }
 }

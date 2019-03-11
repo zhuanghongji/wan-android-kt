@@ -15,7 +15,7 @@ interface ApiService {
      * http://www.wanandroid.com/banner/json
      */
     @GET("/banner/json")
-    fun getBanner(): Observable<Result<List<Banner>>>
+    fun getBanner(): Observable<ApiResult<List<Banner>>>
 
     /**
      * 获取首页置顶文章列表
@@ -23,7 +23,7 @@ interface ApiService {
      * http://www.wanandroid.com/article/top/json
      */
     @GET("/article/top/json")
-    fun getTopArticles(): Observable<Result<MutableList<Article>>>
+    fun getTopArticles(): Observable<ApiResult<MutableList<Article>>>
 
     /**
      * 获取文章列表
@@ -32,7 +32,7 @@ interface ApiService {
      * @param pageNum 页码
      */
     @GET("/article/list/{pageNum}/json")
-    fun getArticles(@Path("pageNum") pageNum: Int): Observable<Result<Articles>>
+    fun getArticles(@Path("pageNum") pageNum: Int): Observable<ApiResult<Articles>>
 
     /**
      * 获取知识体系
@@ -40,7 +40,7 @@ interface ApiService {
      * http://www.wanandroid.com/tree/json
      */
     @GET("/tree/json")
-    fun getKnowledgeTree(): Observable<Result<List<Knowledges>>>
+    fun getKnowledgeTree(): Observable<ApiResult<List<Knowledges>>>
 
     /**
      * 知识体系下的文章
@@ -52,7 +52,7 @@ interface ApiService {
      */
     @GET("/article/list/{pageNum}/json")
     fun getKnowledgeArticles(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
-            : Observable<Result<Articles>>
+            : Observable<ApiResult<Articles>>
 
     /**
      * 导航数据
@@ -60,7 +60,7 @@ interface ApiService {
      * http://www.wanandroid.com/navi/json
      */
     @GET("/navi/json")
-    fun getNavigations(): Observable<Result<List<Navigation>>>
+    fun getNavigations(): Observable<ApiResult<List<Navigation>>>
 
     /**
      * 项目数据
@@ -68,7 +68,7 @@ interface ApiService {
      * http://www.wanandroid.com/project/tree/json
      */
     @GET("/project/tree/json")
-    fun getProjects(): Observable<Result<List<Project>>>
+    fun getProjects(): Observable<ApiResult<List<Project>>>
 
     /**
      * 项目列表数据
@@ -80,7 +80,7 @@ interface ApiService {
      */
     @GET("/project/list/{pageNum}/json")
     fun getProjectArticles(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
-            : Observable<Result<Articles>>
+            : Observable<ApiResult<Articles>>
 
     /**
      * 登录
@@ -93,7 +93,7 @@ interface ApiService {
     @POST("/user/login")
     @FormUrlEncoded
     fun login(@Field("username") username: String,  @Field("password") password: String)
-            : Observable<Result<LoginInfo>>
+            : Observable<ApiResult<LoginInfo>>
 
     /**
      * 注册
@@ -108,7 +108,7 @@ interface ApiService {
     @FormUrlEncoded
     fun register(@Field("username") username: String,
                            @Field("password") password: String,
-                           @Field("repassword") repassword: String): Observable<Result<LoginInfo>>
+                           @Field("repassword") repassword: String): Observable<ApiResult<LoginInfo>>
 
     /**
      * 退出登录
@@ -116,7 +116,7 @@ interface ApiService {
      * http://www.wanandroid.com/user/logout/json
      */
     @GET("/user/logout/json")
-    fun logout(): Observable<Result<Any>>
+    fun logout(): Observable<ApiResult<Any>>
 
     /**
      *  获取收藏列表
@@ -127,7 +127,7 @@ interface ApiService {
      */
     @GET("/lg/collect/list/{page}/json")
     fun getCollects(@Path("pageNum") pageNum: Int):
-            Observable<Result<Collections<ArticleCollection>>>
+            Observable<ApiResult<Collections<ArticleCollection>>>
 
     /**
      * 收藏站内文章
@@ -137,7 +137,7 @@ interface ApiService {
      * @param articleId 文章 id
      */
     @POST("/lg/collect/{articleId}/json")
-    fun addCollectArticle(@Path("articleId") articleId: Int): Observable<Result<Any>>
+    fun addCollectArticle(@Path("articleId") articleId: Int): Observable<ApiResult<Any>>
 
     /**
      * 收藏站外文章
@@ -153,7 +153,7 @@ interface ApiService {
     fun addCoolectOutsideArticle(@Field("title") title: String,
                                  @Field("author") author: String,
                                  @Field("link") link: String)
-            : Observable<Result<Any>>
+            : Observable<ApiResult<Any>>
 
     /**
      * 文章列表中取消收藏文章
@@ -163,7 +163,7 @@ interface ApiService {
      * @param articleId 文章 id
      */
     @POST("/lg/uncollect_originId/{articleId}/json")
-    fun cancelCollectArticle(@Path("articleId") id: Int): Observable<Result<Any>>
+    fun cancelCollectArticle(@Path("articleId") id: Int): Observable<ApiResult<Any>>
 
     /**
      * 收藏列表中取消收藏文章
@@ -176,7 +176,7 @@ interface ApiService {
     @POST("/lg/uncollect/{id}/json")
     @FormUrlEncoded
     fun removeCollectArticle(@Path("id") id: Int, @Field("originId") originId: Int = -1)
-            : Observable<Result<Any>>
+            : Observable<ApiResult<Any>>
 
     /**
      * 搜索热词
@@ -184,7 +184,7 @@ interface ApiService {
      * http://www.wanandroid.com/hotkey/json
      */
     @GET("/hotkey/json")
-    fun getHotSearchs(): Observable<Result<MutableList<HotSearch>>>
+    fun getHotSearchs(): Observable<ApiResult<MutableList<HotSearch>>>
 
     /**
      * 搜索
@@ -197,7 +197,7 @@ interface ApiService {
     @POST("/article/query/{pageNum}/json")
     @FormUrlEncoded
     fun queryBySearchKey(@Path("pageNum") pageNum: Int,
-                         @Field("k") key: String): Observable<Result<Articles>>
+                         @Field("k") key: String): Observable<ApiResult<Articles>>
 
     /**
      * 获取TODO列表数据
@@ -207,7 +207,7 @@ interface ApiService {
      * @param type
      */
     @POST("/lg/todo/list/{type}/json")
-    fun getTodoByType(@Path("type") type: Int): Observable<Result<AllTodo>>
+    fun getTodoByType(@Path("type") type: Int): Observable<ApiResult<AllTodo>>
 
     /**
      * 获取未完成Todo列表
@@ -219,7 +219,7 @@ interface ApiService {
      */
     @POST("/lg/todo/listnotdo/{type}/json/{page}")
     fun getNoTodoList(@Path("page") page: Int, @Path("type") type: Int)
-            : Observable<Result<Todos>>
+            : Observable<ApiResult<Todos>>
 
     /**
      * 获取已完成Todo列表
@@ -229,7 +229,7 @@ interface ApiService {
      */
     @POST("/lg/todo/listdone/{type}/json/{page}")
     fun getDoneList(@Path("page") page: Int, @Path("type") type: Int)
-            : Observable<Result<Todos>>
+            : Observable<ApiResult<Todos>>
 
     /**
      * V2版本 ： 获取TODO列表数据
@@ -245,7 +245,7 @@ interface ApiService {
      */
     @GET("/lg/todo/v2/list/{page}/json")
     fun getTodoList(@Path("page") page: Int, @QueryMap map: MutableMap<String, Any>)
-            : Observable<Result<AllTodo>>
+            : Observable<ApiResult<AllTodo>>
 
     /**
      * 仅更新完成状态Todo
@@ -257,7 +257,7 @@ interface ApiService {
      */
     @POST("/lg/todo/done/{id}/json")
     @FormUrlEncoded
-    fun updateTodoById(@Path("id") id: Int, @Field("status") status: Int): Observable<Result<Any>>
+    fun updateTodoById(@Path("id") id: Int, @Field("status") status: Int): Observable<ApiResult<Any>>
 
     /**
      * 删除一条Todo
@@ -267,7 +267,7 @@ interface ApiService {
      * @param todoId
      */
     @POST("/lg/todo/delete/{todoId}/json")
-    fun deleteTodoById(@Path("todoId") todoId: Int): Observable<Result<Any>>
+    fun deleteTodoById(@Path("todoId") todoId: Int): Observable<ApiResult<Any>>
 
     /**
      * 新增一条Todo
@@ -282,7 +282,7 @@ interface ApiService {
      */
     @POST("/lg/todo/add/json")
     @FormUrlEncoded
-    fun addTodo(@FieldMap map: MutableMap<String, Any>): Observable<Result<Any>>
+    fun addTodo(@FieldMap map: MutableMap<String, Any>): Observable<ApiResult<Any>>
 
     /**
      * 更新一条Todo内容
@@ -300,7 +300,7 @@ interface ApiService {
     @POST("/lg/todo/update/{todoId}/json")
     @FormUrlEncoded
     fun updateTodo(@Path("todoId") todoId: Int, @FieldMap map: MutableMap<String, Any>)
-            : Observable<Result<Any>>
+            : Observable<ApiResult<Any>>
 
     /**
      * 获取公众号列表
@@ -308,7 +308,7 @@ interface ApiService {
      * http://wanandroid.com/wxarticle/chapters/json
      */
     @GET("/wxarticle/chapters/json")
-    fun getWXChapters(): Observable<Result<MutableList<WxChapter>>>
+    fun getWXChapters(): Observable<ApiResult<MutableList<WxChapter>>>
 
     /**
      * 查看某个公众号历史数据
@@ -320,7 +320,7 @@ interface ApiService {
      */
     @GET("/wxarticle/list/{id}/{page}/json")
     fun getWXArticles(@Path("id") id: Int, @Path("page") page: Int)
-            : Observable<Result<Articles>>
+            : Observable<ApiResult<Articles>>
 
     /**
      * 在某个公众号中搜索历史文章
@@ -335,5 +335,5 @@ interface ApiService {
     fun queryWxArticles(@Path("id") id: Int,
                         @Query("k") key: String,
                         @Path("page") page: Int)
-            : Observable<Result<Articles>>
+            : Observable<ApiResult<Articles>>
 }

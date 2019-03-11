@@ -53,5 +53,5 @@ dependencies {
     // implementation rootProject.ext.supports['constraint-layout']
     implementation project(':base_common')
     //    annotationProcessor rootProject.ext.libs['glide-compiler']
-    //    annotationProcessor rootProject.ext.libs["arouter-compiler"]
+    annotationProcessor rootProject.ext.libs["arouter-compiler"]
 }
