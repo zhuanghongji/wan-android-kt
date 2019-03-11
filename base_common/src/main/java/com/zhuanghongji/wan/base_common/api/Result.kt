@@ -1,11 +1,12 @@
 package com.zhuanghongji.wan.base_common.api
 
+import com.squareup.moshi.Json
+
+/**
+ * 接口返回结果
+ */
 data class Result<T> (
 
-    val errorCode: Int = 0,
-
-    val errorMsg: String = "",
-
-    val data: T
-)
+    @Json(name = "data") val data: T
+) : BaseResult()
 

@@ -21,6 +21,7 @@ def aRouterCompilerVersion = '1.2.2'
 def aRouterRegisterVersion = '1.0.2'
 def eventBusVersion = '3.1.1'
 def glideVersion = '4.9.0'
+def loggerVersion = '2.2.0'
 
 def junitVersion = '4.2'
 
@@ -91,6 +92,7 @@ project.ext {
             "glide-compiler"              : "com.github.bumptech.glide:compiler:${glideVersion}",
 
             "eventbus"                    : "org.greenrobot:eventbus:${eventBusVersion}",
+            "logger"                      : "com.orhanobut:logger:${loggerVersion}",
             "junit"                       : "junit:junit:${junitVersion}",
             "moshi"                       : "com.squareup.moshi:moshi:${moshiVersion}"
     ]

@@ -2,7 +2,7 @@ package com.zhuanghongji.wan.base_common.http.intercepter
 
 import com.zhuanghongji.wan.base_common.api.ApiConstant
 import com.zhuanghongji.wan.base_common.delegate.Preference
-import com.zhuanghongji.wan.base_common.manager.CookieManager
+import com.zhuanghongji.wan.base_common.utils.CookieUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -35,7 +35,7 @@ class HeaderIntercepter: Interceptor {
             val cookie: String = if (spDomain.isNotEmpty()) spDomain else ""
             if (cookie.isNotEmpty()) {
                 // put cookie to the header
-                builder.addHeader(CookieManager.COOKIE_NAME, cookie)
+                builder.addHeader(CookieUtil.COOKIE_NAME, cookie)
             }
         }
         return chain.proceed(builder.build())

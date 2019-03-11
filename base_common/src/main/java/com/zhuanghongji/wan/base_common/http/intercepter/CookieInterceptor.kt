@@ -1,7 +1,7 @@
 package com.zhuanghongji.wan.base_common.http.intercepter
 
 import com.zhuanghongji.wan.base_common.api.ApiConstant
-import com.zhuanghongji.wan.base_common.manager.CookieManager
+import com.zhuanghongji.wan.base_common.utils.CookieUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -18,11 +18,11 @@ class CookieInterceptor: Interceptor {
         val isCookieRequest = requestUrl.contains(ApiConstant.SAVE_USER_LOGIN_KEY)
                 || requestUrl.contains(ApiConstant.SAVE_USER_REGISTER_KEY)
 
-        val cookies = response.headers(CookieManager.SET_COOKIE_KEY)
+        val cookies = response.headers(CookieUtil.SET_COOKIE_KEY)
         if (isCookieRequest && cookies.isNotEmpty()) {
-            val cookie = CookieManager.encodeCookie(cookies)
+            val cookie = CookieUtil.encodeCookie(cookies)
             val domain = request.url().host()
-            CookieManager.saveCookie(requestUrl, domain, cookie)
+            CookieUtil.saveCookie(requestUrl, domain, cookie)
         }
         return response
     }

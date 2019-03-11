@@ -89,5 +89,6 @@ dependencies {
     api rootProject.ext.libs['glide-compiler']
 
     api rootProject.ext.libs['eventbus']
+    api rootProject.ext.libs['logger']
     api rootProject.ext.libs['junit']
 }

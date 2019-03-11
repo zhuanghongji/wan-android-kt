@@ -1,23 +1,19 @@
 package com.zhuanghongji.wan
 
-import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.widget.TextView
+import com.orhanobut.logger.Logger
 import com.zhuanghongji.wan.base_common.base.BaseActivity
+import com.zhuanghongji.wan.base_common.ext.ss
 import com.zhuanghongji.wan.base_common.http.HttpManager
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class MainActivity : BaseActivity() {
 
-    private val TAG = "MainActivity"
-
-    private lateinit var btnPerform: Button
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    companion object {
+        const val TAG = "MainActivity"
     }
+
+    private lateinit var tvText: TextView
 
     override fun useEventBus(): Boolean {
         return false
@@ -28,30 +24,30 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
-        btnPerform = findViewById(R.id.btn_perform)
+        tvText = findViewById(R.id.tvText)
+    }
+
+    override fun initData() {
+        // do nothing
     }
 
     override fun initEvent() {
-        btnPerform.setOnClickListener {
-            performRequest()
+        tvText.setOnClickListener {
+            Log.i(TAG, "tvText")
         }
     }
 
     override fun initElse() {
-        Log.i(TAG, "initElse")
+        // do nothing
     }
 
-    override fun performRequest() {
-        Log.i(TAG, "performRequest")
-        HttpManager.apiService.getBanner()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.i(TAG, "onNext")
-            }, {
-                Log.i(TAG, "onError")
-            }, {
-                Log.i(TAG, "onCompleted")
-            }).dispose()
+    override fun start() {
+        requestBanner()
+    }
+
+    private fun requestBanner() {
+        HttpManager.apiService.getBanner().ss {
+            Logger.t(TAG).d(it)
+        }
     }
 }
