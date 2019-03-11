@@ -28,7 +28,7 @@ class Preference<T>(
         /**
          * Clear all SharePreference data
          */
-        fun cleare() {
+        fun clear() {
             prefs.edit().clear().apply()
         }
 

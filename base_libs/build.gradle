@@ -90,5 +90,14 @@ dependencies {
 
     api rootProject.ext.libs['eventbus']
     api rootProject.ext.libs['logger']
+
+    api rootProject.ext.libs['swipeback']
+    api rootProject.ext.libs['litepal']
+    api rootProject.ext.libs['banner']
+    api rootProject.ext.libs['flow-layout']
+    api rootProject.ext.libs['brvh']
+
+    api rootProject.ext.libs['anko']
+
     api rootProject.ext.libs['junit']
 }

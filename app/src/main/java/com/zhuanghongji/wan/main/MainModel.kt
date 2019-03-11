@@ -1,4 +1,4 @@
-package com.zhuanghongji.wan
+package com.zhuanghongji.wan.main
 
 import com.zhuanghongji.wan.base_common.api.ApiResult
 import com.zhuanghongji.wan.base_common.api.datas.Banner
