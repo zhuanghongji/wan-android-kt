@@ -1,11 +1,14 @@
 package com.zhuanghongji.wan.main.wechat
 
+import android.view.View
 import com.google.android.material.tabs.TabLayout
 import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.api.datas.WxChapter
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
+import com.zhuanghongji.wan.event.ColorEvent
 import com.zhuanghongji.wan.main.knowledge.tree.WeChatContract
 import com.zhuanghongji.wan.manager.SettingManager
+import kotlinx.android.synthetic.main.fragment_wechat.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -60,7 +63,7 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
     }
 
     override fun lazyLoad() {
-        mPresenter?.getWXChapters()
+        mPresenter?.requestWxChapters()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -78,7 +81,7 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
         }
     }
 
-    override fun showWXChapters(chapters: MutableList<WXChapterBean>) {
+    override fun setWxChapters(chapters: MutableList<WxChapter>) {
         chapters.let {
             datas.addAll(it)
             viewPager.run {
@@ -115,8 +118,8 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
         if (viewPagerAdapter.count == 0) {
             return
         }
-        val fragment: KnowledgeFragment = viewPagerAdapter.getItem(viewPager.currentItem) as KnowledgeFragment
-        fragment.scrollToTop()
+//        val fragment: KnowledgeFragment = viewPagerAdapter.getItem(viewPager.currentItem) as KnowledgeFragment
+//        fragment.scrollToTop()
     }
 
 }

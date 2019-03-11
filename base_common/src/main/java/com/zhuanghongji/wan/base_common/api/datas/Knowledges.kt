@@ -7,7 +7,7 @@ import com.squareup.moshi.Json
  */
 data class Knowledges (
 
-    @Json(name = "children") val children: List<Any>,
+    @Json(name = "children") val children: List<Knowledge>,
 
     @Json(name = "courseId") val courseId: Int,
 

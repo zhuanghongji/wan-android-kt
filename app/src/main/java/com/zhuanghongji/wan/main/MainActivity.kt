@@ -1,19 +1,16 @@
 package com.zhuanghongji.wan.main
 
 import android.content.DialogInterface
-import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.navigation.NavigationView
 import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.base.BaseMvpActivity
@@ -29,12 +26,10 @@ import com.zhuanghongji.wan.main.project.ProjectFragment
 import com.zhuanghongji.wan.main.wechat.WeChatFragment
 import com.zhuanghongji.wan.utils.DialogUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import org.greenrobot.eventbus.ThreadMode
-
-import kotlinx.android.synthetic.main.custom_preference_layout.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
@@ -96,7 +91,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     override fun initView() {
         super.initView()
         toolbar.run {
-            title.text = getString(R.string.app_name)
+            title = getString(R.string.app_name)
             setSupportActionBar(this)
         }
 
@@ -104,7 +99,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             // 以前使用 BottomNavigationViewHelper.disableShiftMode(this) 方法来设置底部图标和字体都显示并去掉点击动画
             // 升级到 28.0.0 之后，官方重构了 BottomNavigationView ，目前可以使用 labelVisibilityMode = 1 来替代
             // BottomNavigationViewHelper.disableShiftMode(this)
-            labelVisibilityMode = 1
+            labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
             setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         }
 
@@ -123,9 +118,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
             setOnClickListener {
                 if (!isLogin) {
-                    Intent(this@MainActivity, LoginActivity::class.java).run {
-                        startActivity(this)
-                    }
+//                    Intent(this@MainActivity, LoginActivity::class.java).run {
+//                        startActivity(this)
+//                    }
                 } else {
 
                 }
@@ -165,8 +160,8 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun refreshColor(event: ColorEvent) {
         if (event.isRefresh) {
-            nav_view.getHeaderView(0).setBackgroundColor(mThemeColor)
-            floating_action_btn.backgroundTintList = ColorStateList.valueOf(mThemeColor)
+//            nav_view.getHeaderView(0).setBackgroundColor(mThemeColor)
+//            floating_action_btn.backgroundTintList = ColorStateList.valueOf(mThemeColor)
         }
     }
 
@@ -209,7 +204,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
         when (index) {
             FRAGMENT_HOME // 首页
             -> {
-                toolbar.title.text = getString(R.string.app_name)
+                toolbar.title = getString(R.string.app_name)
                 if (mHomeFragment == null) {
                     mHomeFragment = HomeFragment.getInstance()
                     transaction.add(R.id.container, mHomeFragment!!, "home")
@@ -219,7 +214,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
             FRAGMENT_KNOWLEDGE // 知识体系
             -> {
-                toolbar.title.text = getString(R.string.knowledge_system)
+                toolbar.title = getString(R.string.knowledge_system)
                 if (mKnowledgeTreeFragment == null) {
                     mKnowledgeTreeFragment = KnowledgeTreeFragment.getInstance()
                     transaction.add(R.id.container, mKnowledgeTreeFragment!!, "knowledge")
@@ -229,7 +224,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
             FRAGMENT_NAVIGATION // 导航
             -> {
-                toolbar.title.text = getString(R.string.navigation)
+                toolbar.title = getString(R.string.navigation)
                 if (mNavigationFragment == null) {
                     mNavigationFragment = NavigationFragment.getInstance()
                     transaction.add(R.id.container, mNavigationFragment!!, "navigation")
@@ -239,7 +234,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
             FRAGMENT_PROJECT // 项目
             -> {
-                toolbar.title.text = getString(R.string.project)
+                toolbar.title = getString(R.string.project)
                 if (mProjectFragment == null) {
                     mProjectFragment = ProjectFragment.getInstance()
                     transaction.add(R.id.container, mProjectFragment!!, "project")
@@ -249,7 +244,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
             FRAGMENT_WECHAT // 公众号
             -> {
-                toolbar.title.text = getString(R.string.wechat)
+                toolbar.title = getString(R.string.wechat)
                 if (mWeChatFragment == null) {
                     mWeChatFragment = WeChatFragment.getInstance()
                     transaction.add(R.id.container, mWeChatFragment!!, "wechat")
@@ -305,12 +300,12 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
         }
 
-//    /**
-//     * NavigationView 监听
-//     */
-//    private val onDrawerNavigationItemSelectedListener =
-//        NavigationView.OnNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
+    /**
+     * NavigationView 监听
+     */
+    private val onDrawerNavigationItemSelectedListener =
+        NavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
 //                R.id.nav_collect -> {
 //                    if (isLogin) {
 //                        Intent(this@MainActivity, CommonActivity::class.java).run {
@@ -367,9 +362,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 //                    }
 //                    // drawer_layout.closeDrawer(GravityCompat.START)
 //                }
-//            }
-//            true
-//        }
+            }
+            true
+        }
 
     override fun recreate() {
         try {

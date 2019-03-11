@@ -5,7 +5,11 @@ import com.google.android.material.tabs.TabLayout
 import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.api.datas.Project
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
+import com.zhuanghongji.wan.event.ColorEvent
 import com.zhuanghongji.wan.main.knowledge.tree.ProjectContract
+import com.zhuanghongji.wan.manager.SettingManager
+import kotlinx.android.synthetic.main.fragment_project.*
+import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectContract.Presenter>(), ProjectContract.View {
@@ -53,8 +57,8 @@ class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectContract.Pr
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun refreshColor(event: ColorEvent) {
         if (event.isRefresh) {
-            if (!SettingUtil.getIsNightMode()) {
-                tabLayout.setBackgroundColor(SettingUtil.getColor())
+            if (!SettingManager.getIsNightMode()) {
+                tabLayout.setBackgroundColor(SettingManager.getColor())
             }
         }
     }
@@ -69,7 +73,7 @@ class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectContract.Pr
     }
 
     override fun lazyLoad() {
-        mPresenter?.requestProjectTree()
+        mPresenter?.requestProjects()
     }
 
     override fun doReConnected() {
@@ -78,7 +82,7 @@ class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectContract.Pr
         }
     }
 
-    override fun setProjectTree(list: List<ProjectTreeBean>) {
+    override fun setProjects(list: List<Project>) {
         list.let {
             projectTree.addAll(it)
             viewPager.run {
@@ -115,8 +119,8 @@ class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectContract.Pr
         if (viewPagerAdapter.count == 0) {
             return
         }
-        val fragment: ProjectListFragment = viewPagerAdapter.getItem(viewPager.currentItem) as ProjectListFragment
-        fragment.scrollToTop()
+//        val fragment: ProjectListFragment = viewPagerAdapter.getItem(viewPager.currentItem) as ProjectListFragment
+//        fragment.scrollToTop()
     }
 
 }

@@ -1,20 +1,21 @@
-package com.zhuanghongji.wan.main.project
+package com.zhuanghongji.wan.main.wechat
 
 import android.text.Html
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
-import com.zhuanghongji.wan.base_common.api.datas.Project
+import com.zhuanghongji.wan.base_common.api.datas.WxChapter
 
-class ProjectPagerAdapter(private val list: MutableList<Project>, fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+class WeChatPagerAdapter(private val list: MutableList<WxChapter>, fm: FragmentManager?)
+    : FragmentStatePagerAdapter(fm) {
 
     private val fragments = mutableListOf<Fragment>()
 
     init {
         fragments.clear()
         list.forEach {
-//            fragments.add(ProjectListFragment.getInstance(it.id))
+//            fragments.add(KnowledgeFragment.getInstance(it.id))
         }
     }
 
@@ -25,4 +26,6 @@ class ProjectPagerAdapter(private val list: MutableList<Project>, fm: FragmentMa
     override fun getPageTitle(position: Int): CharSequence? = Html.fromHtml(list[position].name)
 
     override fun getItemPosition(`object`: Any): Int = PagerAdapter.POSITION_NONE
+
+
 }

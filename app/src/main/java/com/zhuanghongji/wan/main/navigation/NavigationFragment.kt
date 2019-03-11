@@ -1,10 +1,14 @@
 package com.zhuanghongji.wan.main.navigation
 
+import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zhuanghongji.wan.R
+import com.zhuanghongji.wan.base_common.api.datas.Navigation
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
+import com.zhuanghongji.wan.base_common.widget.verticaltablayout.VerticalTabLayout
+import com.zhuanghongji.wan.base_common.widget.verticaltablayout.widget.TabView
 import com.zhuanghongji.wan.main.knowledge.tree.NavigationContract
 import kotlinx.android.synthetic.main.fragment_navigation.*
 
@@ -19,7 +23,7 @@ class NavigationFragment : BaseMvpFragment<NavigationContract.View, NavigationCo
     /**
      * datas
      */
-    private var datas = mutableListOf<NavigationBean>()
+    private var datas = mutableListOf<Navigation>()
 
     /**
      * linearLayoutManager
@@ -39,7 +43,7 @@ class NavigationFragment : BaseMvpFragment<NavigationContract.View, NavigationCo
     private var currentIndex: Int = 0
     private var bClickTab: Boolean = false
 
-    override fun attachLayoutRes(): Int = R.layout.fragment_navigation
+    override fun getLayoutResID(): Int = R.layout.fragment_navigation
 
     override fun initView(view: View) {
         super.initView(view)
@@ -170,10 +174,10 @@ class NavigationFragment : BaseMvpFragment<NavigationContract.View, NavigationCo
     }
 
     override fun lazyLoad() {
-        mPresenter?.requestNavigationList()
+        mPresenter?.requestNavigations()
     }
 
-    override fun setNavigationData(list: List<NavigationBean>) {
+    override fun setNavigations(list: List<Navigation>) {
         list.let {
             navigation_tab_layout.run {
                 setTabAdapter(NavigationTabAdapter(activity!!.applicationContext, list))
@@ -192,7 +196,7 @@ class NavigationFragment : BaseMvpFragment<NavigationContract.View, NavigationCo
         }
     }
 
-    fun scrollToTop() {
+    override fun scrollToTop() {
         navigation_tab_layout.setTabSelected(0)
     }
 

@@ -26,7 +26,7 @@ abstract class BaseFragment: Fragment() {
     private var hasLoadData = false
 
     /** 多种状态的 View */
-    protected var mStatusView: MultipleStatusView? = null
+    protected var mLayoutStatusView: MultipleStatusView? = null
 
     /**
      * 获取页面布局 ID
@@ -81,7 +81,7 @@ abstract class BaseFragment: Fragment() {
         lazyLoadDataIfPrepared()
 
         // 设置 "重试" 点击事件
-        mStatusView?.setOnClickListener(mRetryClickListener)
+        mLayoutStatusView?.setOnClickListener(mRetryClickListener)
     }
 
     private fun lazyLoadDataIfPrepared() {

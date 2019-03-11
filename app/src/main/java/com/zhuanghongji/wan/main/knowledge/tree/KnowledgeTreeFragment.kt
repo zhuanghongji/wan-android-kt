@@ -1,8 +1,6 @@
 package com.zhuanghongji.wan.main.knowledge.tree
 
-import android.content.Intent
 import android.view.View
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -11,7 +9,6 @@ import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.api.datas.Knowledges
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
 import com.zhuanghongji.wan.widget.RecyclerViewItemDecoration
-
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
 class KnowledgeTreeFragment : BaseMvpFragment<KnowledgeTreeContract.View, KnowledgeTreeContract.Presenter>(), KnowledgeTreeContract.View {
@@ -133,11 +130,11 @@ class KnowledgeTreeFragment : BaseMvpFragment<KnowledgeTreeContract.View, Knowle
     private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
         if (datas.size != 0) {
             val data = datas[position]
-            Intent(activity, KnowledgeActivity::class.java).run {
-                putExtra(Constant.CONTENT_TITLE_KEY, data.name)
-                putExtra(Constant.CONTENT_DATA_KEY, data)
-                startActivity(this)
-            }
+//            Intent(activity, KnowledgeActivity::class.java).run {
+//                putExtra(Constant.CONTENT_TITLE_KEY, data.name)
+//                putExtra(Constant.CONTENT_DATA_KEY, data)
+//                startActivity(this)
+//            }
         }
     }
 

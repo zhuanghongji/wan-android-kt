@@ -96,6 +96,7 @@ dependencies {
     api rootProject.ext.libs['banner']
     api rootProject.ext.libs['flow-layout']
     api rootProject.ext.libs['brvh']
+    api rootProject.ext.libs['badgeview']
 
     api rootProject.ext.libs['anko']
 
