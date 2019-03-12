@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import com.zhuanghongji.wan.base_common.api.datas.WxChapter
+import com.zhuanghongji.wan.main.knowledge.KnowledgeFragment
 
 class WeChatPagerAdapter(private val list: MutableList<WxChapter>, fm: FragmentManager?)
     : FragmentStatePagerAdapter(fm) {
@@ -15,7 +16,7 @@ class WeChatPagerAdapter(private val list: MutableList<WxChapter>, fm: FragmentM
     init {
         fragments.clear()
         list.forEach {
-//            fragments.add(KnowledgeFragment.getInstance(it.id))
+            fragments.add(KnowledgeFragment.getInstance(it.id))
         }
     }
 

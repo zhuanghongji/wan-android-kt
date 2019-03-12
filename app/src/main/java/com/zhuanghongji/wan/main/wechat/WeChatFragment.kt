@@ -6,6 +6,7 @@ import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.api.datas.WxChapter
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
 import com.zhuanghongji.wan.event.ColorEvent
+import com.zhuanghongji.wan.main.knowledge.KnowledgeFragment
 import com.zhuanghongji.wan.main.knowledge.tree.WeChatContract
 import com.zhuanghongji.wan.manager.SettingManager
 import kotlinx.android.synthetic.main.fragment_wechat.*
@@ -118,8 +119,8 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
         if (viewPagerAdapter.count == 0) {
             return
         }
-//        val fragment: KnowledgeFragment = viewPagerAdapter.getItem(viewPager.currentItem) as KnowledgeFragment
-//        fragment.scrollToTop()
+        val fragment: KnowledgeFragment = viewPagerAdapter.getItem(viewPager.currentItem) as KnowledgeFragment
+        fragment.scrollToTop()
     }
 
 }
