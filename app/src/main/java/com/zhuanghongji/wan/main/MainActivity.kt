@@ -2,6 +2,7 @@ package com.zhuanghongji.wan.main
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -37,11 +38,11 @@ import org.jetbrains.anko.uiThread
 class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
     override fun initElse() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.i("MainActivity", "initElse")
     }
 
     override fun initEvent() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.i("MainActivity", "initEvent")
     }
 
     private val BOTTOM_INDEX: String = "bottom_index"
@@ -83,7 +84,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            mIndex = savedInstanceState?.getInt(BOTTOM_INDEX)
+            mIndex = savedInstanceState.getInt(BOTTOM_INDEX)
         }
         super.onCreate(savedInstanceState)
     }

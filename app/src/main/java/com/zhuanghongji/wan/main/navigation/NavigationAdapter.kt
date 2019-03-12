@@ -11,7 +11,7 @@ import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.api.datas.Article
 import com.zhuanghongji.wan.base_common.api.datas.Navigation
 import com.zhuanghongji.wan.utils.CommonUtil
-import com.zhuanghongji.wan.utils.DisplayManager
+import com.zhuanghongji.wan.base_common.utils.DisplayManager
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
 import com.zhy.view.flowlayout.TagFlowLayout

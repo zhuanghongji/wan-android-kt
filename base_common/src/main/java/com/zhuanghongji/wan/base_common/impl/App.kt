@@ -8,6 +8,7 @@ import com.orhanobut.logger.PrettyFormatStrategy
 import com.zhuanghongji.wan.base_common.BuildConfig
 import com.zhuanghongji.wan.base_common.Wan
 import com.zhuanghongji.wan.base_common.base.BaseApplication
+import com.zhuanghongji.wan.base_common.utils.DisplayManager
 import kotlin.properties.Delegates
 
 
@@ -28,6 +29,8 @@ class App: BaseApplication() {
         super.onCreate()
         instance = this
         context = applicationContext
+
+        DisplayManager.init(context)
 
         initLogger()
         initARouter()

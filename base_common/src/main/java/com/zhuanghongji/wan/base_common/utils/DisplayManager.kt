@@ -1,4 +1,4 @@
-package com.zhuanghongji.wan.utils
+package com.zhuanghongji.wan.base_common.utils
 
 import android.content.Context
 import android.util.DisplayMetrics
@@ -55,7 +55,10 @@ object DisplayManager {
      */
     fun getRealWidth(px: Int): Int {
         //ui图的宽度
-        return getRealWidth(px, STANDARD_WIDTH.toFloat())
+        return getRealWidth(
+            px,
+            STANDARD_WIDTH.toFloat()
+        )
     }
 
     /**
@@ -77,7 +80,10 @@ object DisplayManager {
      */
     fun getRealHeight(px: Int): Int {
         //ui图的宽度
-        return getRealHeight(px, STANDARD_HEIGHT.toFloat())
+        return getRealHeight(
+            px,
+            STANDARD_HEIGHT.toFloat()
+        )
     }
 
     /**

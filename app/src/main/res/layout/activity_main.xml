@@ -28,7 +28,7 @@
                 app:elevation="@dimen/dp_16"
                 app:itemIconTint="@drawable/nav_item_color_state"
                 app:itemTextColor="@drawable/nav_item_color_state"
-                app:layout_behavior="com.cxz.wanandroid.widget.behavior.BottomNavigationBehavior"
+                app:layout_behavior="com.zhuanghongji.wan.widget.behavior.BottomNavigationBehavior"
                 app:menu="@menu/bottom_navigation_main"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,7 +39,7 @@
                 android:layout_marginEnd="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_20"
                 android:layout_marginBottom="@dimen/dp_60"
-                app:layout_behavior="com.cxz.wanandroid.widget.behavior.ScaleDownShowBehavior"
+                app:layout_behavior="com.zhuanghongji.wan.widget.behavior.ScaleDownShowBehavior"
                 app:srcCompat="@drawable/ic_arrow_upward_white_24dp"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

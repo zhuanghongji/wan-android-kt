@@ -11,6 +11,8 @@ import io.reactivex.functions.BiFunction
 
 class HomePresenter: MainCommonPresenter<HomeContract.Model, HomeContract.View>(), HomeContract.Presenter {
 
+    override fun createModel(): HomeContract.Model? = HomeModel()
+
     override fun requestBanner() {
         mModel?.requestBanner()?.ss(mModel, mView, false) {
             mView?.setBanner(it.data)
