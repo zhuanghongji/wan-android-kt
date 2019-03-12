@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import com.zhuanghongji.wan.base_common.api.datas.Project
+import com.zhuanghongji.wan.main.project.list.ProjectListFragment
 
 class ProjectPagerAdapter(private val list: MutableList<Project>, fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
 
@@ -14,7 +15,7 @@ class ProjectPagerAdapter(private val list: MutableList<Project>, fm: FragmentMa
     init {
         fragments.clear()
         list.forEach {
-//            fragments.add(ProjectListFragment.getInstance(it.id))
+            fragments.add(ProjectListFragment.getInstance(it.id))
         }
     }
 

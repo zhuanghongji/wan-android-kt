@@ -7,6 +7,7 @@ import com.zhuanghongji.wan.base_common.api.datas.Project
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
 import com.zhuanghongji.wan.event.ColorEvent
 import com.zhuanghongji.wan.main.knowledge.tree.ProjectContract
+import com.zhuanghongji.wan.main.project.list.ProjectListFragment
 import com.zhuanghongji.wan.manager.SettingManager
 import kotlinx.android.synthetic.main.fragment_project.*
 import org.greenrobot.eventbus.Subscribe
@@ -119,8 +120,8 @@ class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectContract.Pr
         if (viewPagerAdapter.count == 0) {
             return
         }
-//        val fragment: ProjectListFragment = viewPagerAdapter.getItem(viewPager.currentItem) as ProjectListFragment
-//        fragment.scrollToTop()
+        val fragment: ProjectListFragment = viewPagerAdapter.getItem(viewPager.currentItem) as ProjectListFragment
+        fragment.scrollToTop()
     }
 
 }
