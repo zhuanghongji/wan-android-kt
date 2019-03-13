@@ -4,10 +4,15 @@ import com.zhuanghongji.wan.base_common.ext.toast
 import com.zhuanghongji.wan.base_common.mvp.IPresenter
 import com.zhuanghongji.wan.base_common.mvp.IView
 
+/**
+ * 用于实现 MVP 架构的 Base Activity
+ *
+ * @param V View 视图接口，由当前 Activity 作具体实现，管理视图的状态与显示
+ * @param P Presenter 控制器接口，创建一个新的类来作具体实现，放置业务逻辑
+ */
 abstract class BaseMvpActivity<V: IView, P: IPresenter<V>>: BaseActivity(), IView {
 
     protected var mPresenter: P? = null
-
 
     protected abstract fun createPresenter(): P
 

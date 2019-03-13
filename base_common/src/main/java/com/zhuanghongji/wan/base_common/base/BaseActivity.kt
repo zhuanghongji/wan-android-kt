@@ -24,17 +24,19 @@ import org.greenrobot.eventbus.ThreadMode
  */
 abstract class BaseActivity: AppCompatActivity() {
 
+    /** `true` 已登录；`false` 未登录 */
     protected var isLogin: Boolean by Preference(PreferenceConstant.IS_LOGIN, false)
 
+    /** `true` 当前有网络；`false` 当前没网络 */
     protected var hasNetwork: Boolean by Preference(PreferenceConstant.HAS_NETWORK, false)
 
+    /** 网络变化广播通知的接收器 */
     private var mNetworkChangedReceiver: NetworkChangedReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // 隐藏标题栏、强制所有 Activity 都为竖屏
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-        // 无默认标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        // 强制所有 Activity 都为竖屏
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
 
@@ -89,8 +91,7 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // super.onBackPressed()
-        // Fragment 逐个出栈
+        // 点击返回按钮时，栈里有 Fragment 的话则让其出栈先
         val count = supportFragmentManager.backStackEntryCount
         if (count == 0) {
             super.onBackPressed()
@@ -99,18 +100,41 @@ abstract class BaseActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * 是否使用 EventBus
+     *
+     * @return true 使用（默认则）；false 不使用
+     */
     open fun useEventBus(): Boolean = true
 
+    /**
+     * 获取 Activity Content View 的资源 ID
+     */
     @LayoutRes abstract fun getLayoutResID(): Int
 
+    /**
+     * 通过 findViewById 初始化当前页面的所有视图
+     */
     abstract fun initView()
 
+    /**
+     * 初始化视图的点击、长按等事件
+     */
     abstract fun initEvent()
 
+    /**
+     * 初始化从 Intent 中传过来的数据
+     */
     abstract fun initData()
 
+    /**
+     * 其它初始化操作（比如设置视图的状态、显示内容等）
+     */
     abstract fun initElse()
 
+    /**
+     * 初始化完成，执行其它操作（比如开始网络请求）
+     */
     abstract fun start()
 
     @Suppress("unused")
@@ -130,7 +154,7 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
     /**
-     * 解注册网络变化的广播监听器
+     * 反注册网络变化的广播监听器
      */
     private fun unRegisterNeNetworkChangedReceiver() {
         if (mNetworkChangedReceiver != null) {

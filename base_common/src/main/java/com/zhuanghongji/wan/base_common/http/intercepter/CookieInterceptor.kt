@@ -15,8 +15,8 @@ class CookieInterceptor: Interceptor {
         val response = chain.proceed(request)
 
         val requestUrl = request.url().toString()
-        val isCookieRequest = requestUrl.contains(ApiConstant.SAVE_USER_LOGIN_KEY)
-                || requestUrl.contains(ApiConstant.SAVE_USER_REGISTER_KEY)
+        val isCookieRequest = requestUrl.contains(ApiConstant.PATH_USER_LOGIN)
+                || requestUrl.contains(ApiConstant.PATH_USER_REGISTER)
 
         val cookies = response.headers(CookieUtil.SET_COOKIE_KEY)
         if (isCookieRequest && cookies.isNotEmpty()) {

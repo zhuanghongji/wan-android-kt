@@ -26,10 +26,10 @@ class HeaderIntercepter: Interceptor {
 
         val domain = request.url().host()
         val url = request.url().toString()
-        val isContains = url.contains(ApiConstant.COLLECTIONS_WEBSITE)
-                || url.contains(ApiConstant.UNCOLLECTIONS_WEBSITE)
-                || url.contains(ApiConstant.ARTICLE_WEBSITE)
-                || url.contains(ApiConstant.TODO_WEBSITE)
+        val isContains = url.contains(ApiConstant.PATH_COLLECT_WEBSITE)
+                || url.contains(ApiConstant.PATH_UN_COLLECT_WEBSITE)
+                || url.contains(ApiConstant.PATH_ARTICLE)
+                || url.contains(ApiConstant.PATH_TODO)
         if (domain.isEmpty() && isContains) {
             val spDomain: String by Preference(domain, "")
             val cookie: String = if (spDomain.isNotEmpty()) spDomain else ""
