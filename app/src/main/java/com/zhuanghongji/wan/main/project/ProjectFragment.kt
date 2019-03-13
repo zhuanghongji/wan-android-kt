@@ -38,7 +38,6 @@ class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectContract.Pr
     override fun useEventBus(): Boolean = true
 
     override fun initView(view: View) {
-        super.initView(view)
         mLayoutStatusView = multiple_status_view
         viewPager.run {
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

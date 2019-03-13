@@ -46,7 +46,6 @@ class NavigationFragment : BaseMvpFragment<NavigationContract.View, NavigationCo
     override fun getLayoutResID(): Int = R.layout.fragment_navigation
 
     override fun initView(view: View) {
-        super.initView(view)
         mLayoutStatusView = multiple_status_view
         recyclerView.run {
             layoutManager = linearLayoutManager

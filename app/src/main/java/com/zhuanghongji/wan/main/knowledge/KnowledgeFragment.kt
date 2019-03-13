@@ -108,7 +108,6 @@ class KnowledgeFragment : BaseMvpFragment<KnowledgeContract.View, KnowledgeContr
     override fun getLayoutResID(): Int = R.layout.fragment_refresh_layout
 
     override fun initView(view: View) {
-        super.initView(view)
         mLayoutStatusView = multiple_status_view
         cid = arguments?.getInt(PreferenceConstant.CONTENT_CID_KEY) ?: 0
         swipeRefreshLayout.run {

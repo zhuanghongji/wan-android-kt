@@ -100,7 +100,6 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     }
 
     override fun initView(view: View) {
-        super.initView(view)
         mLayoutStatusView = multiple_status_view
         swipeRefreshLayout.run {
             setOnRefreshListener(onRefreshListener)

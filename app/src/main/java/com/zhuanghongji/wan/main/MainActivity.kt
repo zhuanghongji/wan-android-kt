@@ -66,7 +66,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     /**
      * local username
      */
-    private val username: String by Preference(PreferenceConstant.USERNAME_KEY, "")
+    private val username: String by Preference(PreferenceConstant.USERNAME, "")
 
     /**
      * username TextView
@@ -90,7 +90,6 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     }
 
     override fun initView() {
-        super.initView()
         toolbar.run {
             title = getString(R.string.app_name)
             setSupportActionBar(this)

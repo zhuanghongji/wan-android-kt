@@ -50,7 +50,6 @@ class KnowledgeTreeFragment : BaseMvpFragment<KnowledgeTreeContract.View, Knowle
     }
 
     override fun initView(view: View) {
-        super.initView(view)
         mLayoutStatusView = multiple_status_view
         swipeRefreshLayout.run {
             setOnRefreshListener(onRefreshListener)

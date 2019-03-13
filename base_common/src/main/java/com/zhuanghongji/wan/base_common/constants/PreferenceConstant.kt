@@ -1,12 +1,27 @@
 package com.zhuanghongji.wan.base_common.constants
 
+/**
+ * 与 SharePreference 相关的所有常量
+ */
 object PreferenceConstant {
 
+    /**
+     * 是否登录
+     */
     const val IS_LOGIN = "is_login"
-    const val HAS_NETWORK = "is_login"
+
+    /**
+     * 是否有网络
+     */
+    const val HAS_NETWORK = "has_network"
 
     const val LOGIN_KEY = "login"
-    const val USERNAME_KEY = "username"
+
+    /**
+     * 用户名
+     */
+    const val USERNAME = "username"
+
     const val PASSWORD_KEY = "password"
     const val TOKEN_KEY = "token"
     const val HAS_NETWORK_KEY = "has_network"
@@ -19,26 +34,32 @@ object PreferenceConstant {
      * url key
      */
     const val CONTENT_URL_KEY = "url"
+
     /**
      * title key
      */
     const val CONTENT_TITLE_KEY = "title"
+
     /**
      * id key
      */
     const val CONTENT_ID_KEY = "id"
+
     /**
      * id key
      */
     const val CONTENT_CID_KEY = "cid"
+
     /**
      * share key
      */
     const val CONTENT_SHARE_TYPE = "text/plain"
+
     /**
      * content data key
      */
     const val CONTENT_DATA_KEY = "content_data"
+
 
     const val TYPE_KEY = "type"
 

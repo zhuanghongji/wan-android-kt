@@ -13,19 +13,11 @@ fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
-fun Activity.toast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-}
-
 fun Fragment.toast(message: String) {
     Toast.makeText(this.activity?.applicationContext, message, Toast.LENGTH_SHORT).show()
 }
 
 fun Context.toastLong(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-}
-
-fun Activity.toastLong(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 

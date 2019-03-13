@@ -96,7 +96,6 @@ class ProjectListFragment : BaseMvpFragment<ProjectListContract.View, ProjectLis
     override fun getLayoutResID(): Int = R.layout.fragment_refresh_layout
 
     override fun initView(view: View) {
-        super.initView(view)
         mLayoutStatusView = multiple_status_view
         cid = arguments!!.getInt(PreferenceConstant.CONTENT_CID_KEY)
 

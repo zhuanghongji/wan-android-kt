@@ -37,7 +37,6 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
     override fun getLayoutResID(): Int = R.layout.fragment_wechat
 
     override fun initView(view: View) {
-        super.initView(view)
         mLayoutStatusView = multiple_status_view
         viewPager.run {
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
