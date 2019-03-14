@@ -16,11 +16,12 @@ object Wan {
 
     fun getAppContext(): Context {
         if (context != null) return context!!
+
         throw NullPointerException("You should init context first before get it.")
     }
 
     /**
-     * 判断 App 是否是 Debug 版本
+     * 判断当前 App 是否是 Debug 版本
      *
      * @return `true` 是；`false` 不是
      */

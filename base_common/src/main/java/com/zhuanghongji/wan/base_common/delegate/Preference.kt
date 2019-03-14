@@ -7,6 +7,8 @@ import java.io.*
 import kotlin.reflect.KProperty
 
 /**
+ * 对应本应用中最主要的 [SharedPreferences] 文件
+ *
  * Kotlin 委托属性 + SharePreference 实例
  */
 class Preference<T>(

@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 /**
- * BaseModel
+ * Base Model
  */
 abstract class BaseModel: IModel, LifecycleObserver {
 
@@ -21,7 +21,7 @@ abstract class BaseModel: IModel, LifecycleObserver {
         disposable?.let { mCompositeDisposable?.add(it) }
     }
 
-    override fun onDetch() {
+    override fun onDetach() {
         unDispose()
     }
 

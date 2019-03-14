@@ -6,5 +6,5 @@ interface IModel {
 
     fun addDisposable(disposable: Disposable?)
 
-    fun onDetch()
+    fun onDetach()
 }

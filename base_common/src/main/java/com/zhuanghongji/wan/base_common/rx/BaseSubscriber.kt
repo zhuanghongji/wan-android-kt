@@ -12,11 +12,11 @@ abstract class BaseSubscriber<T: BaseResult>: ResourceSubscriber<T>() {
     }
 
     override fun onNext(t: T) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onError(t: Throwable?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onComplete() {

@@ -10,21 +10,27 @@ import java.net.NetworkInterface
 import java.net.SocketException
 import java.net.URL
 
+/**
+ * 网络相关工具类
+ */
 class NetworkUtil {
 
     companion object {
 
         /** Network is available */
         var NET_CNNT_OK = 1
+
         /** Network is timeout */
         var NET_CNNT_TIMEOUT = 2
+
         /** Network is not ready */
         var NET_NOT_PREPARE = 3
+
         /** Network error */
         var NET_ERROR = 4
 
         /** 网络超时的事件(ms) */
-        private val TIMEOUT_VALUE = 3000
+        private const val TIMEOUT_VALUE = 3000
 
         /**
          * 检查当前网络是否可用
@@ -53,9 +59,9 @@ class NetworkUtil {
         }
 
         /**
-         * 得到ip地址
+         * 获取 IP 地址
          *
-         * @return
+         * @return IP 地址
          */
         @JvmStatic
         fun getLocalIpAddress(): String {
@@ -170,7 +176,7 @@ class NetworkUtil {
                 val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 // 获取 NetworkInfo 对象
                 val networkInfo = manager.activeNetworkInfo
-                // 判断 NetworkInfo 对象是否为空 并且类型是否为MOBILE
+                // 判断 NetworkInfo 对象是否为空 并且类型是否为 MOBILE
                 if (null != networkInfo && networkInfo.type == ConnectivityManager.TYPE_MOBILE) {
                     return networkInfo.isAvailable
                 }

@@ -5,11 +5,14 @@ import com.zhuanghongji.wan.base_common.api.BaseResult
 import com.zhuanghongji.wan.base_common.http.exception.ErrorStatus
 import io.reactivex.observers.ResourceObserver
 
+/**
+ * Base Observer
+ */
 abstract class BaseObserver<T: BaseResult>: ResourceObserver<T>() {
 
     companion object {
 
-        val TAG = "BaseObserver"
+        const val TAG = "BaseObserver"
     }
 
     abstract fun onSuccess()

@@ -8,6 +8,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import org.greenrobot.eventbus.EventBus
 
+/**
+ * Base Presenter
+ */
 abstract class BasePresenter<M: IModel, V: IView>: IPresenter<V>, LifecycleObserver {
 
     protected var mModel: M? = null
@@ -40,6 +43,18 @@ abstract class BasePresenter<M: IModel, V: IView>: IPresenter<V>, LifecycleObser
     }
 
     override fun detachView() {
+        if (useEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
+        // 保证 Activity 结束时取消所有正在执行的订阅
+        unDispose()
+        mModel?.onDetach()
+        mModel = null
+        mView = null
+        mCompositeDisposable = null
+    }
+
+    open fun checkViewAttached() {
         if (!isViewAttached) throw MvpViewNotAttachedException()
     }
 
@@ -70,5 +85,5 @@ abstract class BasePresenter<M: IModel, V: IView>: IPresenter<V>, LifecycleObser
     }
 
     private class MvpViewNotAttachedException internal constructor()
-        : RuntimeException("Please call IPresenter.attachView(IView) before requesting data to the presenter")
+        : RuntimeException("Please call attachView before requesting data to the presenter")
 }

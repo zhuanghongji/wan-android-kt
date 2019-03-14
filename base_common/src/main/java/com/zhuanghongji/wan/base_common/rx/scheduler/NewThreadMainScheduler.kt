@@ -1,5 +1,6 @@
 package com.zhuanghongji.wan.base_common.rx.scheduler
 
+import com.zhuanghongji.wan.base_common.rx.BaseScheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

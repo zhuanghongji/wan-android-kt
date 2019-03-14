@@ -9,11 +9,32 @@ import android.widget.RelativeLayout
 import com.zhuanghongji.wan.base_common.R
 import java.util.*
 
+/**
+ * 多状态视图（比如用于网络加载提示等）
+ */
+@Suppress("MemberVisibilityCanBePrivate")
 class MultipleStatusView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr) {
+
+    companion object {
+        private val TAG = "MultipleStatusView"
+
+        private val DEFAULT_LAYOUT_PARAMS = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.MATCH_PARENT
+        )
+
+        private const val NULL_RESOURCE_ID = -1
+
+        const val STATUS_CONTENT = 0x00
+        const val STATUS_LOADING = 0x01
+        const val STATUS_EMPTY = 0x02
+        const val STATUS_ERROR = 0x03
+        const val STATUS_NO_NETWORK = 0x04
+    }
 
     private var mEmptyView: View? = null
     private var mErrorView: View? = null
@@ -28,10 +49,10 @@ class MultipleStatusView @JvmOverloads constructor(
     private val mContentViewResId: Int
 
     /**
-     * 获取当前状态
+     * 当前状态
      */
-    var viewStatus: Int = 0
-        private set
+    private var viewStatus: Int = 0
+
     private val mInflater: LayoutInflater
     private var mOnRetryClickListener: View.OnClickListener? = null
 
@@ -56,7 +77,7 @@ class MultipleStatusView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         clear(mEmptyView, mLoadingView, mErrorView, mNoNetworkView)
-        mOtherIds?.clear()
+        mOtherIds.clear()
         if (null != mOnRetryClickListener) {
             mOnRetryClickListener = null
         }
@@ -88,6 +109,7 @@ class MultipleStatusView @JvmOverloads constructor(
      * @param view         自定义视图
      * @param layoutParams 布局参数
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     fun showEmpty(view: View?, layoutParams: ViewGroup.LayoutParams) {
         checkNull(view, "Empty view is null.")
         checkNull(layoutParams, "Layout params is null.")
@@ -111,7 +133,8 @@ class MultipleStatusView @JvmOverloads constructor(
      * @param layoutParams 布局参数
      */
     @JvmOverloads
-    fun showError(layoutId: Int = mErrorViewResId, layoutParams: ViewGroup.LayoutParams = DEFAULT_LAYOUT_PARAMS) {
+    fun showError(layoutId: Int = mErrorViewResId,
+                  layoutParams: ViewGroup.LayoutParams = DEFAULT_LAYOUT_PARAMS) {
         showError(if (null == mErrorView) inflateView(layoutId) else mErrorView, layoutParams)
     }
 
@@ -144,7 +167,8 @@ class MultipleStatusView @JvmOverloads constructor(
      * @param layoutParams 布局参数
      */
     @JvmOverloads
-    fun showLoading(layoutId: Int = mLoadingViewResId, layoutParams: ViewGroup.LayoutParams = DEFAULT_LAYOUT_PARAMS) {
+    fun showLoading(layoutId: Int = mLoadingViewResId,
+                    layoutParams: ViewGroup.LayoutParams = DEFAULT_LAYOUT_PARAMS) {
         showLoading(if (null == mLoadingView) inflateView(layoutId) else mLoadingView, layoutParams)
     }
 
@@ -173,9 +197,8 @@ class MultipleStatusView @JvmOverloads constructor(
      * @param layoutParams 布局参数
      */
     @JvmOverloads
-    fun showNoNetwork(
-        layoutId: Int = mNoNetworkViewResId,
-        layoutParams: ViewGroup.LayoutParams = DEFAULT_LAYOUT_PARAMS
+    fun showNoNetwork(layoutId: Int = mNoNetworkViewResId,
+                      layoutParams: ViewGroup.LayoutParams = DEFAULT_LAYOUT_PARAMS
     ) {
         showNoNetwork(if (mNoNetworkView == null) inflateView(layoutId) else mNoNetworkView, layoutParams)
     }
@@ -281,33 +304,4 @@ class MultipleStatusView @JvmOverloads constructor(
         }
 
     }
-
-    companion object {
-        private val TAG = "MultipleStatusView"
-
-        private val DEFAULT_LAYOUT_PARAMS = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.MATCH_PARENT
-        )
-
-        val STATUS_CONTENT = 0x00
-        val STATUS_LOADING = 0x01
-        val STATUS_EMPTY = 0x02
-        val STATUS_ERROR = 0x03
-        val STATUS_NO_NETWORK = 0x04
-
-        private val NULL_RESOURCE_ID = -1
-    }
 }
-/**
- * 显示空视图
- */
-/**
- * 显示错误视图
- */
-/**
- * 显示加载中视图
- */
-/**
- * 显示无网络视图
- */

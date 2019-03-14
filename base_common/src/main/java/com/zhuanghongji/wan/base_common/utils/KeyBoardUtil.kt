@@ -6,21 +6,24 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 
+/**
+ * 键盘相关工具类
+ */
 object KeyBoardUtil {
 
     /**
-     * 是否落在 EditText 区域
+     * 触摸事件 [event] 是否在 EditText [view] 的区域内
      */
     fun isHideKeyboard(view: View?, event: MotionEvent): Boolean {
         if (view != null && view is EditText) {
             val location = intArrayOf(0, 0)
             view.getLocationInWindow(location)
-            //获取现在拥有焦点的控件view的位置，即EditText
+            // 获取现在拥有焦点的控件 View 的位置，即 EditText
             val left = location[0]
             val top = location[1]
             val bottom = top + view.height
             val right = left + view.width
-            //判断我们手指点击的区域是否落在EditText上面，如果不是，则返回true，否则返回false
+            // 判断我们手指点击的区域是否落在 EditText 上面，如果不是，则返回 true，否则返回 false
             val isInEt = (event.x > left && event.x < right && event.y > top && event.y < bottom)
             return !isInEt
         }
@@ -28,7 +31,7 @@ object KeyBoardUtil {
     }
 
     /**
-     * 关闭软键盘
+     * 隐藏软键盘
      */
     fun hideKeyBoard(context: Context, view: View?) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -36,7 +39,7 @@ object KeyBoardUtil {
     }
 
     /**
-     * 打卡软键盘
+     * 打开软键盘
      */
     fun openKeyBoard(mEditText: EditText, mContext: Context) {
         val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

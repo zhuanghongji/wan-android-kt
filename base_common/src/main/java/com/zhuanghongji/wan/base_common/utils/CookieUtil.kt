@@ -3,7 +3,7 @@ package com.zhuanghongji.wan.base_common.utils
 import com.zhuanghongji.wan.base_common.delegate.Preference
 
 /**
- * Cookie 管理类
+ * Cookie 工具类
  */
 object CookieUtil {
 
@@ -11,6 +11,9 @@ object CookieUtil {
 
     const val COOKIE_NAME = "Cookie"
 
+    /**
+     * 将 Cookie 编码成字符串
+     */
     fun encodeCookie(cookies: List<String>): String {
         val sb = StringBuilder()
         val set = HashSet<String>()
@@ -32,16 +35,19 @@ object CookieUtil {
         return sb.toString()
     }
 
-    @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+    /**
+     * 将 [url] 和 [domain] 作为键分别保存 Cookie 值到 [Preference] 中
+     *
+     * @param cookies 由 [encodeCookie] 编码过的 Cookies 字符串
+     */
+    @Suppress("UNUSED_VALUE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
     fun saveCookie(url: String?, domain: String?, cookies: String) {
         url ?: return
         var spUrl: String by Preference(url, cookies)
-        @Suppress("UNUSED_VALUE")
         spUrl = cookies
 
         domain ?: return
         var spDomain: String by Preference(domain, cookies)
-        @Suppress("UNUSED_VALUE")
         spDomain = cookies
     }
 }
