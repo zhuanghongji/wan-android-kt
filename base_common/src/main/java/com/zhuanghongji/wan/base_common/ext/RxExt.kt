@@ -53,7 +53,7 @@ fun <T: BaseResult> Observable<T>.ss(
                 Logger.t(TAG).i("onNext, t = %s", t)
                 when(t.errorCode) {
                     ErrorStatus.SUCCESS -> onSuccess(t)
-                    ErrorStatus.TOKEN_INVAILD -> {
+                    ErrorStatus.TOKEN_INVALID -> {
                         Logger.w(TAG, "Token 过期，请重新登录")
                     }
                     else -> view?.showDefaultMessage(t.errorMsg)
@@ -63,7 +63,7 @@ fun <T: BaseResult> Observable<T>.ss(
             override fun onError(e: Throwable) {
                 Logger.t(TAG).i("onError")
                 view?.hideLoading()
-                view?.showError(ExceptionHandler.handleException(e))
+                view?.showError(ExceptionHandler.getExceptionPair(e).second)
             }
         })
 }
@@ -88,7 +88,7 @@ fun <T: BaseResult> Observable<T>.sss (
         .subscribe({
             when(it.errorCode) {
                 ErrorStatus.SUCCESS -> onSuccess(it)
-                ErrorStatus.TOKEN_INVAILD -> {
+                ErrorStatus.TOKEN_INVALID -> {
                     Logger.t(TAG).i("Token 过期，请重新登录")
                 }
                 else -> view?.showDefaultMessage(it.errorMsg)
@@ -96,6 +96,6 @@ fun <T: BaseResult> Observable<T>.sss (
             view?.hideLoading()
         }, {
             view?.hideLoading()
-            view?.showError(ExceptionHandler.handleException(it))
+            view?.showError(ExceptionHandler.getExceptionPair(it).second)
         })
 }

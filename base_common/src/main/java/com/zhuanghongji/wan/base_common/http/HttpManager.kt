@@ -3,9 +3,10 @@ package com.zhuanghongji.wan.base_common.http
 import com.zhuanghongji.wan.base_common.BuildConfig
 import com.zhuanghongji.wan.base_common.api.ApiConstant
 import com.zhuanghongji.wan.base_common.api.ApiService
-import com.zhuanghongji.wan.base_common.http.intercepter.CacheIntercepter
+import com.zhuanghongji.wan.base_common.http.intercepter.CacheInterceptor
+import com.zhuanghongji.wan.base_common.http.intercepter.CommonParamInterceptor
 import com.zhuanghongji.wan.base_common.http.intercepter.CookieInterceptor
-import com.zhuanghongji.wan.base_common.http.intercepter.HeaderIntercepter
+import com.zhuanghongji.wan.base_common.http.intercepter.HeaderInterceptor
 import com.zhuanghongji.wan.base_common.impl.App
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -16,15 +17,16 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+/**
+ * Http 管理类
+ */
 object HttpManager {
 
-
-
     /** 最大缓存大小 50M */
-    const val MAX_CACHE_SIZE: Long = 1024 * 1024 * 50
+    private const val MAX_CACHE_SIZE: Long = 1024 * 1024 * 50
 
     /** 默认超时时间(s) */
-    const val DEFAULT_TIMEOUT: Long = 15
+    private const val DEFAULT_TIMEOUT: Long = 15
 
     private var retrofit: Retrofit? = null
 
@@ -63,9 +65,10 @@ object HttpManager {
 
         builder.run {
             addInterceptor(httpLoginInterceptor)
-            addInterceptor(HeaderIntercepter())
+            addInterceptor(HeaderInterceptor())
             addInterceptor(CookieInterceptor())
-            addInterceptor(CacheIntercepter())
+            addInterceptor(CacheInterceptor())
+            addInterceptor(CommonParamInterceptor())
                 .cache(cache)
             connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

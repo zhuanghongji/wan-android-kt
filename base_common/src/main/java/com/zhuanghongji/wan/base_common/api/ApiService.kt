@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import retrofit2.http.*
 
 /**
- * WAN ANDROID Open API
+ * 封装了 WAN ANDROID 所有 OPEN API 请求的服务接口
  */
 interface ApiService {
 

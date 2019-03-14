@@ -7,6 +7,8 @@ import okhttp3.Response
 
 /**
  * 有网的时候缓存
+ *
+ * 有网无网的拦截器见 [CacheInterceptor]
  */
 class NetCacheIntercepter: Interceptor {
 

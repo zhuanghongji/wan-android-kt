@@ -11,15 +11,42 @@ import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.collections.ArrayList
 
+/**
+ * 可持久化 Cookie 的商店 (Store)
+ */
 class PersistentCookieStore {
 
-    private val TAG = "PersistentCookieStore"
-    private val COOKIE_PREFS = "cookie_prefs"
+    companion object {
+        private const val COOKIE_PREFS = "cookie_prefs"
+    }
 
+    /**
+     * 作为内存缓存 Cookies
+     *
+     * - key: the host from [HttpUrl]
+     * - value: ConcurrentHashMap
+     *    - key: the result of [getCookieToken] method
+     *    - value: the cookie
+     */
     private val cookies: HashMap<String, ConcurrentHashMap<String, Cookie>> = HashMap()
+
+    /**
+     * 持久化 Cookie 的 SharedPreferences
+     *
+     * 键值对有两种情况：
+     *
+     * 第一种：
+     * - key: the host from [HttpUrl]
+     * - value: the result of tokens joined `,`
+     *
+     * 第二种：
+     * - key: the result of  [getCookieToken] method
+     * - value: the value of [OkHttpCookie] encoded by [encodeCookie]
+     */
     private val cookiesPrefs: SharedPreferences
 
     init {
+        // 从 SharedPreferences 中获取所有 Cookie 并添加到内存缓存中
         cookiesPrefs = Wan.getAppContext().getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE)
         val prefsMap = cookiesPrefs.all
         for (entry in prefsMap) {
@@ -43,8 +70,8 @@ class PersistentCookieStore {
         val name = getCookieToken(cookie)
         val host = url.host()
 
-        // 将 Cookies 缓存到内存中，如果缓存过期则重置该 Cookie
-        if (!cookie.persistent()) {
+        // 如果 cookie 未过期则将其缓存到内存中，否则应该从内存缓存中移除
+        if (cookie.persistent()) {
             if (!cookies.containsKey(host)) {
                 cookies[host] = ConcurrentHashMap(10)
             }
@@ -54,14 +81,19 @@ class PersistentCookieStore {
                 cookies[host]?.remove(name)
             }
         }
+
         // 将 Cookie 持久化到本地
         with(cookiesPrefs.edit()) {
-            putString(host, TextUtils.join(",", cookies[host]?.entries))
-            putString(name, encodeCookie(OkHttpCookies(cookie)))
+            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+            putString(host, TextUtils.join(",", cookies[host]?.keys))
+            putString(name, encodeCookie(OkHttpCookie(cookie)))
             apply()
         }
     }
 
+    /**
+     * 获取 [url] 对应的 Cookie 列表
+     */
     fun getCookies(url: HttpUrl): List<Cookie> {
         val list: ArrayList<Cookie> = ArrayList()
         val host = url.host()
@@ -71,6 +103,9 @@ class PersistentCookieStore {
         return list
     }
 
+    /**
+     * 获取缓存中所有的 Cookie
+     */
     fun getAllCookies(): List<Cookie> {
         val result = ArrayList<Cookie>()
         for (key in cookies.keys) {
@@ -79,6 +114,9 @@ class PersistentCookieStore {
         return result
     }
 
+    /**
+     * 从缓存和 [SharedPreferences] 中删除 [url] 对应的 Cookie
+     */
     fun remove(url: HttpUrl, cookie: Cookie): Boolean {
         val name = getCookieToken(cookie)
         val host = url.host()
@@ -88,6 +126,7 @@ class PersistentCookieStore {
                 if (cookiesPrefs.contains(name)) {
                     remove(name)
                 }
+                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
                 putString(host, TextUtils.join(",", cookies[host]?.keys))
                 apply()
             }
@@ -97,7 +136,10 @@ class PersistentCookieStore {
         }
     }
 
-    fun clear() {
+    /**
+     * 从内存缓存和 [SharedPreferences] 中移除所有 Cookie
+     */
+    fun clearAll() {
         cookies.clear()
         with(cookiesPrefs.edit()) {
             clear()
@@ -111,7 +153,7 @@ class PersistentCookieStore {
      * @param cookie 要被序列化的 Cookie
      * @return 序列后的字符串
      */
-    private fun encodeCookie(cookie: OkHttpCookies?): String? {
+    private fun encodeCookie(cookie: OkHttpCookie?): String? {
         if (cookie == null) {
             return null
         }
@@ -140,7 +182,7 @@ class PersistentCookieStore {
         var cookie: Cookie? = null
         try {
             val objectInputStream = ObjectInputStream(byteArrayInputSteam)
-            cookie = (objectInputStream.readObject() as OkHttpCookies).getCookies()
+            cookie = (objectInputStream.readObject() as OkHttpCookie).getCookies()
         } catch (e: IOException) {
             e.printStackTrace()
         } catch (e: ClassCastException) {

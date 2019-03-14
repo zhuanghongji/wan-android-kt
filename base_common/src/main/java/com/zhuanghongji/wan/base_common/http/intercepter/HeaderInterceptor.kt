@@ -9,10 +9,11 @@ import okhttp3.Response
 /**
  * 请求头拦截器
  */
-class HeaderIntercepter: Interceptor {
+class HeaderInterceptor: Interceptor {
 
-
-    val TOKEN_KEY = "token"
+    companion object {
+        const val TOKEN_KEY = "token"
+    }
 
     private var token: String by Preference(TOKEN_KEY, "")
 

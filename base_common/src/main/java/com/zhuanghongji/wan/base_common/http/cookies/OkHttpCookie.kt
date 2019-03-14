@@ -6,36 +6,41 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.io.Serializable
 
-class OkHttpCookies: Serializable {
+/**
+ * 可序列化的 OkHttpCookie 类
+ *
+ * 包装了 OkHttp3 的 [Cookie]
+ */
+class OkHttpCookie: Serializable {
 
-    private lateinit var cookies: Cookie
-    private var clientCookies: Cookie? = null
+    private lateinit var cookie: Cookie
+    private var clientCookie: Cookie? = null
 
     private constructor()
 
-    constructor(cookies: Cookie?) {
-        this.cookies = cookies!!
+    constructor(cookie: Cookie?) {
+        this.cookie = cookie!!
     }
 
     fun getCookies(): Cookie? {
-        var bestCookies: Cookie = cookies
-        if (clientCookies != null) {
-            bestCookies = clientCookies as Cookie
+        var bestCookies: Cookie = cookie
+        if (clientCookie != null) {
+            bestCookies = clientCookie as Cookie
         }
         return bestCookies
     }
 
     @Throws(IOException::class)
     private fun writeObject(out: ObjectOutputStream) {
-        out.writeObject(cookies.name())
-        out.writeObject(cookies.value())
-        out.writeLong(cookies.expiresAt())
-        out.writeObject(cookies.domain())
-        out.writeObject(cookies.path())
-        out.writeBoolean(cookies.secure())
-        out.writeBoolean(cookies.httpOnly())
-        out.writeBoolean(cookies.hostOnly())
-        out.writeBoolean(cookies.persistent())
+        out.writeObject(cookie.name())
+        out.writeObject(cookie.value())
+        out.writeLong(cookie.expiresAt())
+        out.writeObject(cookie.domain())
+        out.writeObject(cookie.path())
+        out.writeBoolean(cookie.secure())
+        out.writeBoolean(cookie.httpOnly())
+        out.writeBoolean(cookie.hostOnly())
+        out.writeBoolean(cookie.persistent())
     }
 
     @Throws(IOException::class, ClassNotFoundException::class)
@@ -56,6 +61,6 @@ class OkHttpCookies: Serializable {
         builder = builder.path(path)
         builder = if (secure) builder.secure() else builder
         builder = if (httpOnly) builder.httpOnly() else builder
-        clientCookies = builder.build()
+        clientCookie = builder.build()
     }
 }

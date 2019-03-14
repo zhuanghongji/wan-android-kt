@@ -1,6 +1,7 @@
 package com.zhuanghongji.wan.base_common.base
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -22,7 +23,20 @@ class BaseAppDelegate(private val application: Application) {
         Wan.init(application)
 
         initLogger()
+        initARouter()
         InitializeService.start(application)
+    }
+
+    /**
+     * 初始化 [ARouter]
+     */
+    private fun initARouter() {
+        if (Wan.isAppDebug()) {
+            // 开启 InstantRun 之后，一定要在 ARouter.init 之前调用 openDebug
+            ARouter.openDebug()
+            ARouter.openLog()
+        }
+        ARouter.init(application)
     }
 
     /**

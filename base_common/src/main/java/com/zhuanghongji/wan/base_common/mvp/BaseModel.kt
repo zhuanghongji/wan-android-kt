@@ -7,6 +7,9 @@ import androidx.lifecycle.OnLifecycleEvent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+/**
+ * BaseModel
+ */
 abstract class BaseModel: IModel, LifecycleObserver {
 
     private var mCompositeDisposable: CompositeDisposable? = null

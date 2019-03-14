@@ -7,9 +7,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 /**
- * 缓存拦截器
+ * 缓存拦截器（会自动处理有网络和无网络两种情况）
  */
-class CacheIntercepter: Interceptor {
+class CacheInterceptor: Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()

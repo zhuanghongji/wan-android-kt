@@ -6,7 +6,7 @@ import okhttp3.Response
 /**
  * 设置通用参数的拦截器
  */
-class CommonParamIntercepter: Interceptor {
+class CommonParamInterceptor: Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
@@ -18,5 +18,4 @@ class CommonParamIntercepter: Interceptor {
         val request = originalRequest.newBuilder().url(modifiedUrl).build()
         return chain.proceed(request)
     }
-
 }

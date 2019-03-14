@@ -16,7 +16,14 @@ class ExceptionHandler {
         var errorCode = ErrorStatus.UNKNOWN_ERROR
         var errorMsg = "请求失败，请稍后重试"
 
-        fun handleException(e: Throwable): String {
+        /**
+         * 根据给定 [Throwable] 类型参数 [e] 的具体类型的类获取异常描述语
+         *
+         * 用于网络请求失败时。
+         *
+         * @return Pair(errorCode, errorMsg)
+         */
+        fun getExceptionPair(e: Throwable): Pair<Int, String> {
             e.printStackTrace()
 
             when(e) {
@@ -42,7 +49,7 @@ class ExceptionHandler {
                 }
             }
             Logger.e(TAG, "$errorMsg：%s", e.message)
-            return errorMsg
+            return Pair(errorCode, errorMsg)
         }
     }
 }
