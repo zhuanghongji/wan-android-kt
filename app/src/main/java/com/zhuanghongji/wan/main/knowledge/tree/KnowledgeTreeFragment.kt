@@ -1,5 +1,6 @@
 package com.zhuanghongji.wan.main.knowledge.tree
 
+import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.api.datas.Knowledges
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
+import com.zhuanghongji.wan.base_common.constants.PreferenceConstant
+import com.zhuanghongji.wan.main.knowledge.KnowledgeActivity
 import com.zhuanghongji.wan.widget.RecyclerViewItemDecoration
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
@@ -65,7 +68,7 @@ class KnowledgeTreeFragment : BaseMvpFragment<KnowledgeTreeContract.View, Knowle
             bindToRecyclerView(recyclerView)
             setEnableLoadMore(false)
             onItemClickListener = this@KnowledgeTreeFragment.onItemClickListener
-            // setEmptyView(R.layout.fragment_empty_layout)
+             setEmptyView(R.layout.fragment_empty_layout)
         }
     }
 
@@ -75,7 +78,7 @@ class KnowledgeTreeFragment : BaseMvpFragment<KnowledgeTreeContract.View, Knowle
     }
 
     override fun showLoading() {
-        // swipeRefreshLayout.isRefreshing = true
+         swipeRefreshLayout.isRefreshing = true
     }
 
     override fun hideLoading() {
@@ -129,11 +132,11 @@ class KnowledgeTreeFragment : BaseMvpFragment<KnowledgeTreeContract.View, Knowle
     private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
         if (datas.size != 0) {
             val data = datas[position]
-//            Intent(activity, KnowledgeActivity::class.java).run {
-//                putExtra(Constant.CONTENT_TITLE_KEY, data.name)
-//                putExtra(Constant.CONTENT_DATA_KEY, data)
-//                startActivity(this)
-//            }
+            Intent(activity, KnowledgeActivity::class.java).run {
+                putExtra(PreferenceConstant.CONTENT_TITLE_KEY, data.name)
+                putExtra(PreferenceConstant.CONTENT_DATA_KEY, data)
+                startActivity(this)
+            }
         }
     }
 

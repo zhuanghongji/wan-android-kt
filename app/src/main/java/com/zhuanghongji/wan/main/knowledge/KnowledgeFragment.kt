@@ -1,5 +1,6 @@
 package com.zhuanghongji.wan.main.knowledge
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -15,6 +16,8 @@ import com.zhuanghongji.wan.base_common.ext.showSnackbar
 import com.zhuanghongji.wan.base_common.ext.toast
 import com.zhuanghongji.wan.base_common.impl.App
 import com.zhuanghongji.wan.base_common.utils.NetworkUtil
+import com.zhuanghongji.wan.content.ContentActivity
+import com.zhuanghongji.wan.login.LoginActivity
 import com.zhuanghongji.wan.widget.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
 
@@ -72,7 +75,7 @@ class KnowledgeFragment : BaseMvpFragment<KnowledgeContract.View, KnowledgeContr
     private var isRefresh = true
 
     override fun showLoading() {
-        // swipeRefreshLayout.isRefreshing = isRefresh
+         swipeRefreshLayout.isRefreshing = isRefresh
     }
 
     override fun hideLoading() {
@@ -193,12 +196,12 @@ class KnowledgeFragment : BaseMvpFragment<KnowledgeContract.View, KnowledgeContr
     private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
         if (datas.size != 0) {
             val data = datas[position]
-//            Intent(activity, ContentActivity::class.java).run {
-//                putExtra(Constant.CONTENT_URL_KEY, data.link)
-//                putExtra(Constant.CONTENT_TITLE_KEY, data.title)
-//                putExtra(Constant.CONTENT_ID_KEY, data.id)
-//                startActivity(this)
-//            }
+            Intent(activity, ContentActivity::class.java).run {
+                putExtra(PreferenceConstant.CONTENT_URL_KEY, data.link)
+                putExtra(PreferenceConstant.CONTENT_TITLE_KEY, data.title)
+                putExtra(PreferenceConstant.CONTENT_ID_KEY, data.id)
+                startActivity(this)
+            }
         }
     }
 
@@ -225,9 +228,9 @@ class KnowledgeFragment : BaseMvpFragment<KnowledgeContract.View, KnowledgeContr
                                 mPresenter?.addCollectArticle(data.id)
                             }
                         } else {
-//                            Intent(activity, LoginActivity::class.java).run {
-//                                startActivity(this)
-//                            }
+                            Intent(activity, LoginActivity::class.java).run {
+                                startActivity(this)
+                            }
                             toast(resources.getString(R.string.login_tint))
                         }
                     }

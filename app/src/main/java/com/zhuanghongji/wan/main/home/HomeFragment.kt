@@ -1,5 +1,6 @@
 package com.zhuanghongji.wan.main.home
 
+import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -12,10 +13,13 @@ import com.zhuanghongji.wan.base_common.api.datas.Article
 import com.zhuanghongji.wan.base_common.api.datas.Articles
 import com.zhuanghongji.wan.base_common.api.datas.Banner
 import com.zhuanghongji.wan.base_common.base.BaseMvpFragment
+import com.zhuanghongji.wan.base_common.constants.PreferenceConstant
 import com.zhuanghongji.wan.base_common.ext.showSnackbar
 import com.zhuanghongji.wan.base_common.ext.toast
 import com.zhuanghongji.wan.base_common.impl.App
 import com.zhuanghongji.wan.base_common.utils.NetworkUtil
+import com.zhuanghongji.wan.content.ContentActivity
+import com.zhuanghongji.wan.login.LoginActivity
 import com.zhuanghongji.wan.manager.ImageManager
 import com.zhuanghongji.wan.widget.SpaceItemDecoration
 import io.reactivex.Observable
@@ -132,7 +136,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     }
 
     override fun showLoading() {
-        // swipeRefreshLayout.isRefreshing = isRefresh
+         swipeRefreshLayout.isRefreshing = isRefresh
     }
 
     override fun hideLoading() {
@@ -231,12 +235,12 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
         if (datas.size != 0) {
             val data = datas[position]
-//            Intent(activity, ContentActivity::class.java).run {
-//                putExtra(Constant.CONTENT_URL_KEY, data.link)
-//                putExtra(Constant.CONTENT_TITLE_KEY, data.title)
-//                putExtra(Constant.CONTENT_ID_KEY, data.id)
-//                startActivity(this)
-//            }
+            Intent(activity, ContentActivity::class.java).run {
+                putExtra(PreferenceConstant.CONTENT_URL_KEY, data.link)
+                putExtra(PreferenceConstant.CONTENT_TITLE_KEY, data.title)
+                putExtra(PreferenceConstant.CONTENT_ID_KEY, data.id)
+                startActivity(this)
+            }
         }
     }
 
@@ -246,12 +250,12 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     private val bannerDelegate = BGABanner.Delegate<ImageView, String> { banner, imageView, model, position ->
         if (bannerDatas.size > 0) {
             val data = bannerDatas[position]
-//            Intent(activity, ContentActivity::class.java).run {
-//                putExtra(Constant.CONTENT_URL_KEY, data.url)
-//                putExtra(Constant.CONTENT_TITLE_KEY, data.title)
-//                putExtra(Constant.CONTENT_ID_KEY, data.id)
-//                startActivity(this)
-//            }
+            Intent(activity, ContentActivity::class.java).run {
+                putExtra(PreferenceConstant.CONTENT_URL_KEY, data.url)
+                putExtra(PreferenceConstant.CONTENT_TITLE_KEY, data.title)
+                putExtra(PreferenceConstant.CONTENT_ID_KEY, data.id)
+                startActivity(this)
+            }
         }
     }
 
@@ -278,9 +282,9 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
                                 mPresenter?.addCollectArticle(data.id)
                             }
                         } else {
-//                            Intent(activity, LoginActivity::class.java).run {
-//                                startActivity(this)
-//                            }
+                            Intent(activity, LoginActivity::class.java).run {
+                                startActivity(this)
+                            }
                             toast(resources.getString(R.string.login_tint))
                         }
                     }

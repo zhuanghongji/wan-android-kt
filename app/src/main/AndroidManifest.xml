@@ -25,6 +25,7 @@
         <activity android:name=".todo.TodoActivity"/>
         <activity android:name=".setting.SettingActivity"/>
         <activity android:name=".search.SearchActivity"/>
+        <activity android:name=".main.knowledge.KnowledgeActivity"/>
     </application>
 
 </manifest>

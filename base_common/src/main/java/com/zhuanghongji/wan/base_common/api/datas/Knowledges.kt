@@ -1,6 +1,7 @@
 package com.zhuanghongji.wan.base_common.api.datas
 
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 知识体系列表
@@ -20,4 +21,4 @@ data class Knowledges (
     @Json(name = "parentChapterId") val parentChapterId: Int,
 
     @Json(name = "visible") val visible: Int
-)
+): Serializable

@@ -1,7 +1,6 @@
 package com.zhuanghongji.wan.main.navigation
 
 import android.view.View
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zhuanghongji.wan.R
@@ -50,7 +49,7 @@ class NavigationFragment : BaseMvpFragment<NavigationContract.View, NavigationCo
         recyclerView.run {
             layoutManager = linearLayoutManager
             adapter = navigationAdapter
-            itemAnimator = DefaultItemAnimator()
+            // itemAnimator = DefaultItemAnimator()
             setHasFixedSize(true)
         }
 
