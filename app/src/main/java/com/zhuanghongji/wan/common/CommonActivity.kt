@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class CommonActivity : BaseActivity() {
 
+    override fun beforeInit() {
+
+    }
+
     override fun initEvent() {
 
     }

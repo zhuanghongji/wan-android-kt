@@ -19,6 +19,9 @@ abstract class BaseMvpActivity<V: IView, P: IPresenter<V>>: BaseActivity(), IVie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun beforeInit() {
         mPresenter = createPresenter()
         // Make sure your activity implements V interface
         @Suppress("UNCHECKED_CAST") mPresenter.attachView(this as V)

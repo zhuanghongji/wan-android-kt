@@ -22,6 +22,11 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 class TodoActivity : BaseActivity() {
+
+    override fun beforeInit() {
+
+    }
+
     override fun initEvent() {
 
     }

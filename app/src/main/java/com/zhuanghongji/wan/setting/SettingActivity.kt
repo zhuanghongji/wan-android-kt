@@ -1,7 +1,6 @@
 package com.zhuanghongji.wan.setting
 
-//import android.app.Fragment
-//import android.app.FragmentTransaction
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +14,10 @@ import kotlinx.android.synthetic.main.toolbar.*
 import org.greenrobot.eventbus.EventBus
 
 class SettingActivity : BaseActivity(), ColorChooserDialog.ColorCallback {
+
+    override fun beforeInit() {
+
+    }
 
     override fun initEvent() {
 

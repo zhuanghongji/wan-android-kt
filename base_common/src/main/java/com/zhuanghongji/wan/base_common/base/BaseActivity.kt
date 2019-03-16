@@ -46,10 +46,13 @@ abstract class BaseActivity: AppCompatActivity() {
             EventBus.getDefault().register(this)
         }
 
+        beforeInit()
+
         initData()
         initView()
         initEvent()
         initElse()
+
         start()
     }
 
@@ -111,6 +114,11 @@ abstract class BaseActivity: AppCompatActivity() {
      * 获取 Activity Content View 的资源 ID
      */
     @LayoutRes abstract fun getLayoutResID(): Int
+
+    /**
+     * beforeInit
+     */
+    abstract fun beforeInit()
 
     /**
      * 通过 findViewById 初始化当前页面的所有视图

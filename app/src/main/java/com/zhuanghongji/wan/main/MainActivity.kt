@@ -28,6 +28,7 @@ import com.zhuanghongji.wan.main.knowledge.tree.KnowledgeTreeFragment
 import com.zhuanghongji.wan.main.navigation.NavigationFragment
 import com.zhuanghongji.wan.main.project.ProjectFragment
 import com.zhuanghongji.wan.main.wechat.WeChatFragment
+import com.zhuanghongji.wan.search.SearchActivity
 import com.zhuanghongji.wan.setting.SettingActivity
 import com.zhuanghongji.wan.todo.TodoActivity
 import com.zhuanghongji.wan.utils.DialogUtil
@@ -426,9 +427,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
                     toast(resources.getString(R.string.logout_success))
                     isLogin = false
                     EventBus.getDefault().post(LoginEvent(false))
-//                    Intent(this@MainActivity, LoginActivity::class.java).run {
-//                        startActivity(this)
-//                    }
+                    Intent(this@MainActivity, LoginActivity::class.java).run {
+                        startActivity(this)
+                    }
                 }
             }
         }
@@ -465,9 +466,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_search -> {
-//                Intent(this, SearchActivity::class.java).run {
-//                    startActivity(this)
-//                }
+                Intent(this, SearchActivity::class.java).run {
+                    startActivity(this)
+                }
                 return true
             }
         }
