@@ -18,6 +18,9 @@ WAN ANDROID 站点汇总了 Android 相关的项目、知识体系、公众号�
 * [wan-android-rn](https://github.com/zhuanghongji/wan-android-rn)
 * [wan-android-flutter](https://github.com/zhuanghongji/wan-android-flutter)
 
+## 截图
+
+[点击查看更多](./screenshots/)
 
 ## 代码结构
 
@@ -60,7 +63,10 @@ WAN ANDROID 站点汇总了 Android 相关的项目、知识体系、公众号�
 
 ## 待办
 
-* [ ] 在 `base_common` 中封装 Logger 的使用
+* [ ] 在 `base_common` 中封装 `Logger` 的使用
+* [ ] 将 `app` 模块中的代码下沉到各个子 `module`
+* [ ] 增加页面结构说明的脑图 
+
 
 
 ## License
