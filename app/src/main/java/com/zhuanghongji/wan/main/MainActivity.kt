@@ -1,6 +1,7 @@
 package com.zhuanghongji.wan.main
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -20,6 +21,7 @@ import com.zhuanghongji.wan.base_common.delegate.Preference
 import com.zhuanghongji.wan.event.ColorEvent
 import com.zhuanghongji.wan.event.LoginEvent
 import com.zhuanghongji.wan.event.RefreshHomeEvent
+import com.zhuanghongji.wan.login.LoginActivity
 import com.zhuanghongji.wan.main.home.HomeFragment
 import com.zhuanghongji.wan.main.knowledge.tree.KnowledgeTreeFragment
 import com.zhuanghongji.wan.main.navigation.NavigationFragment
@@ -37,6 +39,16 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
+    companion object {
+        private const val BOTTOM_INDEX: String = "bottom_index"
+
+        private const val FRAGMENT_HOME = 0x01
+        private const val FRAGMENT_KNOWLEDGE = 0x02
+        private const val FRAGMENT_NAVIGATION = 0x03
+        private const val FRAGMENT_PROJECT = 0x04
+        private const val FRAGMENT_WECHAT = 0x05
+    }
+
     override fun initElse() {
         Log.i("MainActivity", "initElse")
     }
@@ -44,14 +56,6 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     override fun initEvent() {
         Log.i("MainActivity", "initEvent")
     }
-
-    private val BOTTOM_INDEX: String = "bottom_index"
-
-    private val FRAGMENT_HOME = 0x01
-    private val FRAGMENT_KNOWLEDGE = 0x02
-    private val FRAGMENT_NAVIGATION = 0x03
-    private val FRAGMENT_PROJECT = 0x04
-    private val FRAGMENT_WECHAT = 0x05
 
     private var mIndex = FRAGMENT_HOME
 
@@ -118,9 +122,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
             setOnClickListener {
                 if (!isLogin) {
-//                    Intent(this@MainActivity, LoginActivity::class.java).run {
-//                        startActivity(this)
-//                    }
+                    Intent(this@MainActivity, LoginActivity::class.java).run {
+                        startActivity(this)
+                    }
                 } else {
 
                 }
