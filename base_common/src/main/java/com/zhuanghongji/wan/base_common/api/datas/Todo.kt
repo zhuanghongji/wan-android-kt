@@ -1,6 +1,7 @@
 package com.zhuanghongji.wan.base_common.api.datas
 
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 待办
@@ -28,4 +29,4 @@ data class Todo (
     @Json(name = "userId") val userId: Int,
 
     @Json(name = "priority") val priority: Int
-)
+) : Serializable

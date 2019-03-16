@@ -125,7 +125,7 @@ interface ApiService {
      *
      *  @param pageNum
      */
-    @GET("/lg/collect/list/{page}/json")
+    @GET("/lg/collect/list/{pageNum}/json")
     fun getCollects(@Path("pageNum") pageNum: Int):
             Observable<ApiResult<Collections<ArticleCollection>>>
 
@@ -230,6 +230,14 @@ interface ApiService {
     @POST("/lg/todo/listdone/{type}/json/{page}")
     fun getDoneList(@Path("page") page: Int, @Path("type") type: Int)
             : Observable<ApiResult<Todos>>
+
+    /**
+     * 获取TODO列表数据
+     * http://wanandroid.com/lg/todo/list/0/json
+     * @param type
+     */
+    @POST("/lg/todo/list/{type}/json")
+    fun getTodoList(@Path("type") type: Int): Observable<ApiResult<AllTodo>>
 
     /**
      * V2版本 ： 获取TODO列表数据

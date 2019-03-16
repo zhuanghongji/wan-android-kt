@@ -20,6 +20,10 @@
         </activity>
         <activity android:name=".login.LoginActivity"/>
         <activity android:name=".register.RegisterActivity"/>
+        <activity android:name=".content.ContentActivity"/>
+        <activity android:name=".common.CommonActivity"/>
+        <activity android:name=".todo.TodoActivity"/>
+        <activity android:name=".setting.SettingActivity"/>
     </application>
 
 </manifest>

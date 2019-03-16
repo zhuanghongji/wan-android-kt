@@ -13,6 +13,8 @@ import com.zhuanghongji.wan.base_common.utils.NetworkUtil
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val TAG = "RxExt"
 
@@ -98,4 +100,24 @@ fun <T: BaseResult> Observable<T>.sss (
             view?.hideLoading()
             view?.showError(ExceptionHandler.getExceptionPair(it).second)
         })
+}
+
+
+/**
+ * 格式化当前日期
+ */
+fun formatCurrentDate(): String {
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    return sdf.format(Date())
+}
+
+/**
+ * String 转 Calendar
+ */
+fun String.stringToCalendar(): Calendar {
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    val date = sdf.parse(this)
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+    return calendar
 }

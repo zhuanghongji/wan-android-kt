@@ -31,6 +31,8 @@ def brvhVersion = '2.9.35'
 def badgeviewVersion = '1.1.2'
 def spinkitVersion = '1.2.0'
 def fabVersion = '1.6.4'
+def agentwebVersion = '4.0.2'
+def materialDialogsVersion = '0.9.4.4'
 
 def ankoVersion = '0.10.8'
 
@@ -114,6 +116,8 @@ project.ext {
             "badgeview"                   : "q.rorbin:badgeview:${badgeviewVersion}",
             "spinkit"                     : "com.github.ybq:Android-SpinKit:${spinkitVersion}",
             "fab"                         : "com.github.clans:fab:${fabVersion}",
+            "agentweb"                    : "com.just.agentweb:agentweb:${agentwebVersion}",
+            "material-dialogs"            : "com.afollestad.material-dialogs:commons:${materialDialogsVersion}",
 
             "anko"                        : "org.jetbrains.anko:anko:${ankoVersion}",
 

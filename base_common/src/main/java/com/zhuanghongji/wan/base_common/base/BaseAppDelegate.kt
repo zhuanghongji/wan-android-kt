@@ -7,6 +7,7 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.zhuanghongji.wan.base_common.BuildConfig
 import com.zhuanghongji.wan.base_common.Wan
+import com.zhuanghongji.wan.base_common.manager.DisplayManager
 import com.zhuanghongji.wan.base_common.service.InitializeService
 
 /**
@@ -21,6 +22,7 @@ class BaseAppDelegate(private val application: Application) {
      */
     fun onCreate() {
         Wan.init(application)
+        DisplayManager.init(application)
 
         initLogger()
         initARouter()

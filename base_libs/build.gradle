@@ -99,6 +99,8 @@ dependencies {
     api rootProject.ext.libs['badgeview']
     api rootProject.ext.libs['spinkit']
     api rootProject.ext.libs['fab']
+    api rootProject.ext.libs['agentweb']
+    api rootProject.ext.libs['material-dialogs']
 
     api rootProject.ext.libs['anko']
 

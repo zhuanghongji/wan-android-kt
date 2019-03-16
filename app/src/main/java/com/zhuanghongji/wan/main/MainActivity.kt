@@ -18,6 +18,7 @@ import com.zhuanghongji.wan.R
 import com.zhuanghongji.wan.base_common.base.BaseMvpActivity
 import com.zhuanghongji.wan.base_common.constants.PreferenceConstant
 import com.zhuanghongji.wan.base_common.delegate.Preference
+import com.zhuanghongji.wan.common.CommonActivity
 import com.zhuanghongji.wan.event.ColorEvent
 import com.zhuanghongji.wan.event.LoginEvent
 import com.zhuanghongji.wan.event.RefreshHomeEvent
@@ -27,6 +28,8 @@ import com.zhuanghongji.wan.main.knowledge.tree.KnowledgeTreeFragment
 import com.zhuanghongji.wan.main.navigation.NavigationFragment
 import com.zhuanghongji.wan.main.project.ProjectFragment
 import com.zhuanghongji.wan.main.wechat.WeChatFragment
+import com.zhuanghongji.wan.setting.SettingActivity
+import com.zhuanghongji.wan.todo.TodoActivity
 import com.zhuanghongji.wan.utils.DialogUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -310,39 +313,39 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     private val onDrawerNavigationItemSelectedListener =
         NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-//                R.id.nav_collect -> {
-//                    if (isLogin) {
-//                        Intent(this@MainActivity, CommonActivity::class.java).run {
-//                            putExtra(Constant.TYPE_KEY, Constant.Type.COLLECT_TYPE_KEY)
-//                            startActivity(this)
-//                        }
-//                    } else {
-//                        showToast(resources.getString(R.string.login_tint))
-//                        Intent(this@MainActivity, LoginActivity::class.java).run {
-//                            startActivity(this)
-//                        }
-//                    }
-//                    // drawer_layout.closeDrawer(GravityCompat.START)
-//                }
-//                R.id.nav_setting -> {
-//                    Intent(this@MainActivity, SettingActivity::class.java).run {
-//                        // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
-//                        startActivity(this)
-//                    }
-//                    // drawer_layout.closeDrawer(GravityCompat.START)
-//                }
-//                R.id.nav_about_us -> {
-//                    Intent(this@MainActivity, CommonActivity::class.java).run {
-//                        putExtra(Constant.TYPE_KEY, Constant.Type.ABOUT_US_TYPE_KEY)
-//                        startActivity(this)
-//                    }
-//                    // drawer_layout.closeDrawer(GravityCompat.START)
-//                }
-//                R.id.nav_logout -> {
-//                    logout()
-//                    // drawer_layout.closeDrawer(GravityCompat.START)
-//                }
-//                R.id.nav_night_mode -> {
+                R.id.nav_collect -> {
+                    if (isLogin) {
+                        Intent(this@MainActivity, CommonActivity::class.java).run {
+                            putExtra(PreferenceConstant.TYPE_KEY, PreferenceConstant.Type.COLLECT_TYPE_KEY)
+                            startActivity(this)
+                        }
+                    } else {
+                        toast(resources.getString(R.string.login_tint))
+                        Intent(this@MainActivity, LoginActivity::class.java).run {
+                            startActivity(this)
+                        }
+                    }
+                    // drawer_layout.closeDrawer(GravityCompat.START)
+                }
+                R.id.nav_setting -> {
+                    Intent(this@MainActivity, SettingActivity::class.java).run {
+                        // putExtra(Constant.TYPE_KEY, Constant.Type.SETTING_TYPE_KEY)
+                        startActivity(this)
+                    }
+                    // drawer_layout.closeDrawer(GravityCompat.START)
+                }
+                R.id.nav_about_us -> {
+                    Intent(this@MainActivity, CommonActivity::class.java).run {
+                        putExtra(PreferenceConstant.TYPE_KEY, PreferenceConstant.Type.ABOUT_US_TYPE_KEY)
+                        startActivity(this)
+                    }
+                    // drawer_layout.closeDrawer(GravityCompat.START)
+                }
+                R.id.nav_logout -> {
+                    logout()
+                    // drawer_layout.closeDrawer(GravityCompat.START)
+                }
+                R.id.nav_night_mode -> {
 //                    if (SettingUtil.getIsNightMode()) {
 //                        SettingUtil.setIsNightMode(false)
 //                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -351,21 +354,21 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 //                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 //                    }
 //                    window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
-//                    recreate()
-//                }
-//                R.id.nav_todo -> {
-//                    if (isLogin) {
-//                        Intent(this@MainActivity, TodoActivity::class.java).run {
-//                            startActivity(this)
-//                        }
-//                    } else {
-//                        showToast(resources.getString(R.string.login_tint))
-//                        Intent(this@MainActivity, LoginActivity::class.java).run {
-//                            startActivity(this)
-//                        }
-//                    }
-//                    // drawer_layout.closeDrawer(GravityCompat.START)
-//                }
+                    recreate()
+                }
+                R.id.nav_todo -> {
+                    if (isLogin) {
+                        Intent(this@MainActivity, TodoActivity::class.java).run {
+                            startActivity(this)
+                        }
+                    } else {
+                        toast(resources.getString(R.string.login_tint))
+                        Intent(this@MainActivity, LoginActivity::class.java).run {
+                            startActivity(this)
+                        }
+                    }
+                    // drawer_layout.closeDrawer(GravityCompat.START)
+                }
             }
             true
         }
